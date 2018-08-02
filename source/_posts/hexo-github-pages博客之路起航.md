@@ -3,7 +3,6 @@ title: hexo+github pages博客之路起航
 date: 2018-07-31 17:08:10
 tags:
     - hexo
-    - github pages
 categories: hexo
 ---
 
