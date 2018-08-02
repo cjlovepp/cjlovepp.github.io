@@ -503,7 +503,7 @@
 </blockquote>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">- 第一阶段，刚接触Blog，觉得很新鲜，试着选择一个免费空间来写。</span><br><span class="line">- 第二阶段，发现免费空间限制太多，就自己购买域名和空间，搭建独立博客。</span><br><span class="line">- 第三阶段，觉得独立博客的管理太麻烦，最好在保留控制权的前提下，让别人来管，自己只负责写文章。</span><br></pre></td></tr></table></figure>
 <p>由于平时比较懒所以第一、第二阶段虽然都经历过但都没坚持下来（理由吗、、、有很多），平时更多的是通过印象笔记之类的进行知识梳理及记录，但这种三方记录软件存在太多的限制，机缘巧合下遇上了hexo，擦！这不是就是我要找的吗，赶紧拿来学习！说来也惭愧用了这么多年的github直到今天才知道github pages的存在“众里寻他千百度，蓦然回首那人却在灯火阑珊处”说的就是我此时的心情吧。</p>
-<p>网上对于如何使用hexo结合github pages搭建私有博客已经有很多教程，本文的目的只是做些简要的记录不做详细说明。</p>
+<p>网上对于如何使用hexo结合github pages搭建私有博客已经有很多教程，本文的目的只是做些简要的记录不做详细说明。<strong>对于_config.yml的说明：hexo的位于根目录下<code>站点配置文件</code>，<code>主题配置文件</code>在对应的主题目录下</strong></p>
 <h2 id="GitHub-Pages"><a href="#GitHub-Pages" class="headerlink" title="GitHub Pages"></a>GitHub Pages</h2><blockquote>
 <p>Github Pages 是面向用户、组织和项目开放的公共静态页面搭建托管服务，站点可以被免费托管在 Github 上，你可以选择使用 Github Pages 默认提供的域名 github.io 或者自定义域名来发布站点。Github Pages 支持 自动利用 Jekyll 生成站点，也同样支持纯 HTML 文档，将你的 Jekyll 站 点托管在 Github Pages 上是一个不错的选择。</p>
 </blockquote>
@@ -571,7 +571,12 @@
 </ul>
 <h3 id="添加阅读全文按钮"><a href="#添加阅读全文按钮" class="headerlink" title="添加阅读全文按钮"></a>添加阅读全文按钮</h3><p>因为在你的博客主页会有多篇文章，如果你想让你的文章只显示一部分，多余的可以点击阅读全文来查看，那么你需要在你的文章中添加<br><figure class="highlight md"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml"><span class="comment">&lt;!--more--&gt;</span></span></span><br></pre></td></tr></table></figure></p>
 <p>其后面的部分就不会显示了，只能点击阅读全文才能看</p>
-<h3 id="hexo源码提交（即可实现多台电脑写博客）"><a href="#hexo源码提交（即可实现多台电脑写博客）" class="headerlink" title="hexo源码提交（即可实现多台电脑写博客）"></a>hexo源码提交（即可实现多台电脑写博客）</h3><h3 id="自动部署到github-pages"><a href="#自动部署到github-pages" class="headerlink" title="自动部署到github pages"></a>自动部署到github pages</h3>
+<h3 id="提交hexo源码到github"><a href="#提交hexo源码到github" class="headerlink" title="提交hexo源码到github"></a>提交hexo源码到github</h3><p>hexo在将网站发布到github时只是将生成的静态页同步到github中，而编写的文件源码（xxx.md）并不会上传到git。这样的话当我们数据损坏或者需要在别的地方编写时就会很尴尬。所以最好的方式是我们把hexo源代码也上传到github中。</p>
+<ul>
+<li>建立分支：因为 master 分支是存放 Hexo 博客生成的页面，所以只能创建一个分支来保存博客的源代码在你的 GitHub<br><img src="/2018/07/31/hexo-github-pages博客之路起航/20180802093931.png" alt=""></li>
+<li>设置默认分支为 <code>hexo</code><br><strong>这里需要有注意站点配置文件 <code>_config.yml</code> 的 <code>deploy</code> 需要设置成 <code>master</code></strong></li>
+</ul>
+<h3 id="自动部署到github-pages"><a href="#自动部署到github-pages" class="headerlink" title="自动部署到github pages"></a>自动部署到github pages</h3>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/07/31/hexo-github-pages博客之路起航/#more" rel="contents">
