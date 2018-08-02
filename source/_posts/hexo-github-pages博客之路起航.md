@@ -197,6 +197,12 @@ comments: false
 hexo在将网站发布到github时只是将生成的静态页同步到github中，而编写的文件源码（xxx.md）并不会上传到git。这样的话当我们数据损坏或者需要在别的地方编写时就会很尴尬。所以最好的方式是我们把hexo源代码也上传到github中。
 
 - 建立分支：因为 master 分支是存放 Hexo 博客生成的页面，所以只能创建一个分支来保存博客的源代码在你的 GitHub
+![](hexo-github-pages博客之路起航/20180802093931.png)
+
+- 设置默认分支为 `hexo`
+**这里需要有注意站点配置文件 `_config.yml` 的 `deploy` 需要设置成 `master`**
+
+- OK，提交到代码到 `hexo` 分支即可
 
 ### 自动部署到github pages
 
