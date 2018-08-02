@@ -573,8 +573,12 @@
 <p>其后面的部分就不会显示了，只能点击阅读全文才能看</p>
 <h3 id="提交hexo源码到github"><a href="#提交hexo源码到github" class="headerlink" title="提交hexo源码到github"></a>提交hexo源码到github</h3><p>hexo在将网站发布到github时只是将生成的静态页同步到github中，而编写的文件源码（xxx.md）并不会上传到git。这样的话当我们数据损坏或者需要在别的地方编写时就会很尴尬。所以最好的方式是我们把hexo源代码也上传到github中。</p>
 <ul>
-<li>建立分支：因为 master 分支是存放 Hexo 博客生成的页面，所以只能创建一个分支来保存博客的源代码在你的 GitHub<br><img src="/2018/07/31/hexo-github-pages博客之路起航/20180802093931.png" alt=""></li>
-<li>设置默认分支为 <code>hexo</code><br><strong>这里需要有注意站点配置文件 <code>_config.yml</code> 的 <code>deploy</code> 需要设置成 <code>master</code></strong></li>
+<li><p>建立分支：因为 master 分支是存放 Hexo 博客生成的页面，所以只能创建一个分支来保存博客的源代码在你的 GitHub<br><img src="/2018/07/31/hexo-github-pages博客之路起航/20180802093931.png" alt=""></p>
+</li>
+<li><p>设置默认分支为 <code>hexo</code><br><strong>这里需要有注意站点配置文件 <code>_config.yml</code> 的 <code>deploy</code> 需要设置成 <code>master</code></strong></p>
+</li>
+<li><p>OK，提交到代码到 <code>hexo</code> 分支即可</p>
+</li>
 </ul>
 <h3 id="自动部署到github-pages"><a href="#自动部署到github-pages" class="headerlink" title="自动部署到github pages"></a>自动部署到github pages</h3>
           <!--noindex-->
