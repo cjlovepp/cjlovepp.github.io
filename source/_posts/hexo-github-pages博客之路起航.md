@@ -203,6 +203,24 @@ hexo在将网站发布到github时只是将生成的静态页同步到github中�
 
 - OK，提交到代码到 `hexo` 分支即可
 
+### 添加背景图片
+给hexo next添加背景图片，只需要在 `themes\next\source\css\_custom\custom.styl` 添加如下代码即可：
+```styl
+  @media screen and (min-width:1200px) {
+
+      body {
+      background-image:url(/images/background.jpg);
+      background-repeat: no-repeat;
+      background-attachment:fixed;
+      background-position:50% 50%; 
+      }
+
+      #footer a {
+          color:#eee;
+      }
+  }
+```
+
 ### 自动部署到github pages
 
 <!--more-->
