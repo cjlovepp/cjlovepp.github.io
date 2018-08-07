@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title><![CDATA[test]]></title>
-    <url>%2F2018%2F08%2F01%2Ftest%2F</url>
-    <content type="text"><![CDATA[]]></content>
+    <title><![CDATA[Spring Cloud配置中心————Spring Cloud Config]]></title>
+    <url>%2F2018%2F08%2F07%2FSpring-Cloud%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83%E2%80%94%E2%80%94Spring-Cloud-Config%2F</url>
+    <content type="text"></content>
+      <categories>
+        <category>Spring Cloud</category>
+      </categories>
+      <tags>
+        <tag>Spring Cloud</tag>
+      </tags>
   </entry>
   <entry>
     <title><![CDATA[hexo+github pages博客之路起航]]></title>
