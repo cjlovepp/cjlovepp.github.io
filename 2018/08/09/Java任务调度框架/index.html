@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="前言在进行Web开发时，我们经常会遇到任务调度的需求，要求你在某个特定的时间段执行某个任务。这里对JAVA的几种任务调度的实现做下学习记录：Timer、ScheduleExecutor、Quartz、JCronTab。 Timerjava.util.Timer提供了一种简单的任务调度实现方法：123456789101112131415161718192021222324252627282930pa">
+<meta name="description" content="前言在进行Web开发时，我们经常会遇到任务调度的需求，要求你在某个特定的时间段执行某个任务。这里对JAVA的几种任务调度的实现做下学习记录：Timer、ScheduleExecutor、Quartz、JCronTab。">
 <meta name="keywords" content="Java">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java任务调度框架">
 <meta property="og:url" content="http://yoursite.com/2018/08/09/Java任务调度框架/index.html">
 <meta property="og:site_name" content="Cjlovepp blogs">
-<meta property="og:description" content="前言在进行Web开发时，我们经常会遇到任务调度的需求，要求你在某个特定的时间段执行某个任务。这里对JAVA的几种任务调度的实现做下学习记录：Timer、ScheduleExecutor、Quartz、JCronTab。 Timerjava.util.Timer提供了一种简单的任务调度实现方法：123456789101112131415161718192021222324252627282930pa">
+<meta property="og:description" content="前言在进行Web开发时，我们经常会遇到任务调度的需求，要求你在某个特定的时间段执行某个任务。这里对JAVA的几种任务调度的实现做下学习记录：Timer、ScheduleExecutor、Quartz、JCronTab。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-08-09T13:03:25.086Z">
+<meta property="og:updated_time" content="2018-08-10T01:05:48.516Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java任务调度框架">
-<meta name="twitter:description" content="前言在进行Web开发时，我们经常会遇到任务调度的需求，要求你在某个特定的时间段执行某个任务。这里对JAVA的几种任务调度的实现做下学习记录：Timer、ScheduleExecutor、Quartz、JCronTab。 Timerjava.util.Timer提供了一种简单的任务调度实现方法：123456789101112131415161718192021222324252627282930pa">
+<meta name="twitter:description" content="前言在进行Web开发时，我们经常会遇到任务调度的需求，要求你在某个特定的时间段执行某个任务。这里对JAVA的几种任务调度的实现做下学习记录：Timer、ScheduleExecutor、Quartz、JCronTab。">
 
 
 
@@ -360,6 +360,37 @@
           
 
           
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  
+                </span>
+              
+            </div>
+          
 
           
 
@@ -377,6 +408,7 @@
 
       
         <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在进行Web开发时，我们经常会遇到任务调度的需求，要求你在某个特定的时间段执行某个任务。这里对JAVA的几种任务调度的实现做下学习记录：Timer、ScheduleExecutor、Quartz、JCronTab。</p>
+<a id="more"></a>
 <h2 id="Timer"><a href="#Timer" class="headerlink" title="Timer"></a>Timer</h2><p><code>java.util.Timer</code>提供了一种简单的任务调度实现方法：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.ibm.scheduler; </span><br><span class="line"><span class="keyword">import</span> java.util.Timer; </span><br><span class="line"><span class="keyword">import</span> java.util.TimerTask; </span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TimerTest</span> <span class="keyword">extends</span> <span class="title">TimerTask</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String jobName = <span class="string">""</span>; </span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">TimerTest</span><span class="params">(String jobName)</span> </span>&#123; </span><br><span class="line">        <span class="keyword">super</span>(); </span><br><span class="line">        <span class="keyword">this</span>.jobName = jobName; </span><br><span class="line">    &#125; </span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span> </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123; </span><br><span class="line">        System.out.println(<span class="string">"execute "</span> + jobName); </span><br><span class="line">    &#125; </span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Timer timer = <span class="keyword">new</span> Timer(); </span><br><span class="line">        <span class="keyword">long</span> delay1 = <span class="number">1</span> * <span class="number">1000</span>; </span><br><span class="line">        <span class="keyword">long</span> period1 = <span class="number">1000</span>; </span><br><span class="line">        <span class="comment">// 从现在开始 1 秒钟之后，每隔 1 秒钟执行一次 job1 </span></span><br><span class="line">        timer.schedule(<span class="keyword">new</span> TimerTest(<span class="string">"job1"</span>), delay1, period1); </span><br><span class="line">        <span class="keyword">long</span> delay2 = <span class="number">2</span> * <span class="number">1000</span>; </span><br><span class="line">        <span class="keyword">long</span> period2 = <span class="number">2000</span>; </span><br><span class="line">        <span class="comment">// 从现在开始 2 秒钟之后，每隔 2 秒钟执行一次 job2 </span></span><br><span class="line">        timer.schedule(<span class="keyword">new</span> TimerTest(<span class="string">"job2"</span>), delay2, period2); </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>输出结果：<br><figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">execute job1 </span><br><span class="line">execute job1 </span><br><span class="line">execute job2 </span><br><span class="line">execute job1 </span><br><span class="line">execute job1 </span><br><span class="line">execute job2</span><br></pre></td></tr></table></figure></p>
 <p>使用 <code>Timer</code> 实现任务调度的核心类是 <code>Timer</code> 和 <code>TimerTask</code>。其中Timer负责设定TimerTask的起始与间隔执行时间。使用者只需要创建一个 TimerTask 的继承类，实现自己的 run 方法，然后将其丢给 Timer 去执行即可。</p>
@@ -552,7 +584,7 @@
 </tr>
 </tbody>
 </table>
-<a id="more"></a>
+
       
     </div>
     
@@ -752,6 +784,15 @@
   </span>
   <span class="author" itemprop="copyrightHolder">Cjlovepp</span>
 
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count"></span>
   
 </div>
 

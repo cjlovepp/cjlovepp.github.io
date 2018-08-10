@@ -361,6 +361,37 @@
           
 
           
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  
+                </span>
+              
+            </div>
+          
 
           
 
@@ -379,181 +410,6 @@
       
         
           <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在进行Web开发时，我们经常会遇到任务调度的需求，要求你在某个特定的时间段执行某个任务。这里对JAVA的几种任务调度的实现做下学习记录：Timer、ScheduleExecutor、Quartz、JCronTab。</p>
-<h2 id="Timer"><a href="#Timer" class="headerlink" title="Timer"></a>Timer</h2><p><code>java.util.Timer</code>提供了一种简单的任务调度实现方法：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.ibm.scheduler; </span><br><span class="line"><span class="keyword">import</span> java.util.Timer; </span><br><span class="line"><span class="keyword">import</span> java.util.TimerTask; </span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TimerTest</span> <span class="keyword">extends</span> <span class="title">TimerTask</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String jobName = <span class="string">""</span>; </span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">TimerTest</span><span class="params">(String jobName)</span> </span>&#123; </span><br><span class="line">        <span class="keyword">super</span>(); </span><br><span class="line">        <span class="keyword">this</span>.jobName = jobName; </span><br><span class="line">    &#125; </span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span> </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123; </span><br><span class="line">        System.out.println(<span class="string">"execute "</span> + jobName); </span><br><span class="line">    &#125; </span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Timer timer = <span class="keyword">new</span> Timer(); </span><br><span class="line">        <span class="keyword">long</span> delay1 = <span class="number">1</span> * <span class="number">1000</span>; </span><br><span class="line">        <span class="keyword">long</span> period1 = <span class="number">1000</span>; </span><br><span class="line">        <span class="comment">// 从现在开始 1 秒钟之后，每隔 1 秒钟执行一次 job1 </span></span><br><span class="line">        timer.schedule(<span class="keyword">new</span> TimerTest(<span class="string">"job1"</span>), delay1, period1); </span><br><span class="line">        <span class="keyword">long</span> delay2 = <span class="number">2</span> * <span class="number">1000</span>; </span><br><span class="line">        <span class="keyword">long</span> period2 = <span class="number">2000</span>; </span><br><span class="line">        <span class="comment">// 从现在开始 2 秒钟之后，每隔 2 秒钟执行一次 job2 </span></span><br><span class="line">        timer.schedule(<span class="keyword">new</span> TimerTest(<span class="string">"job2"</span>), delay2, period2); </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>输出结果：<br><figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">execute job1 </span><br><span class="line">execute job1 </span><br><span class="line">execute job2 </span><br><span class="line">execute job1 </span><br><span class="line">execute job1 </span><br><span class="line">execute job2</span><br></pre></td></tr></table></figure></p>
-<p>使用 <code>Timer</code> 实现任务调度的核心类是 <code>Timer</code> 和 <code>TimerTask</code>。其中Timer负责设定TimerTask的起始与间隔执行时间。使用者只需要创建一个 TimerTask 的继承类，实现自己的 run 方法，然后将其丢给 Timer 去执行即可。</p>
-<p>Timer 的设计核心是一个 TaskList 和一个 TaskThread。Timer 将接收到的任务丢到自己的 TaskList 中，TaskList 按照 Task 的最初执行时间进行排序。TimerThread 在创建 Timer 时会启动成为一个守护线程。这个线程会轮询所有任务，找到一个最近要执行的任务，然后休眠，当到达最近要执行任务的开始时间点，TimerThread 被唤醒并执行该任务。之后 TimerThread 更新最近一个要执行的任务，继续休眠。</p>
-<blockquote>
-<p>Timer 的优点在于简单易用，但由于 <strong>所有任务都是由同一个线程来调度</strong>,因此所有任务都是串行执行的，同一时间只能有一个任务在执行，前一个任务的延迟或异常都将会影响到之后的任务。</p>
-</blockquote>
-<h2 id="ScheduledExecutor"><a href="#ScheduledExecutor" class="headerlink" title="ScheduledExecutor"></a>ScheduledExecutor</h2><p>鉴于 Timer 的上述缺陷，Java 5 推出了基于线程池设计的ScheduledExecutor。其设计思想是，每一个被调度的任务都会由线程池中一个线程去执行，因此任务是并发执行的，相互之间不会受到干扰。需要注意的是，只有当任务的执行时间到来时，ScheduedExecutor才会真正启动一个线程，其余时间 ScheduledExecutor 都是在轮询任务的状态。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.ibm.scheduler;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.Executors;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.ScheduledExecutorService;</span><br><span class="line"><span class="keyword">import</span> java.util.concurrent.TimeUnit;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ScheduledExecutorTest</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String jobName = <span class="string">""</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ScheduledExecutorTest</span><span class="params">(String jobName)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>();</span><br><span class="line">        <span class="keyword">this</span>.jobName = jobName;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"execute "</span> + jobName);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        ScheduledExecutorService service = Executors.newScheduledThreadPool(<span class="number">10</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">long</span> initialDelay1 = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">long</span> period1 = <span class="number">1</span>;</span><br><span class="line">        <span class="comment">// 从现在开始1秒钟之后，每隔1秒钟执行一次job1</span></span><br><span class="line">        service.scheduleAtFixedRate(</span><br><span class="line">                <span class="keyword">new</span> ScheduledExecutorTest(<span class="string">"job1"</span>), initialDelay1,</span><br><span class="line">                period1, TimeUnit.SECONDS);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">long</span> initialDelay2 = <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">long</span> delay2 = <span class="number">1</span>;</span><br><span class="line">        <span class="comment">// 从现在开始2秒钟之后，每隔2秒钟执行一次job2</span></span><br><span class="line">        service.scheduleWithFixedDelay(</span><br><span class="line">                <span class="keyword">new</span> ScheduledExecutorTest(<span class="string">"job2"</span>), initialDelay2,</span><br><span class="line">                delay2, TimeUnit.SECONDS);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>输出：<br><figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">execute job1</span><br><span class="line">execute job1</span><br><span class="line">execute job2</span><br><span class="line">execute job1</span><br><span class="line">execute job1</span><br><span class="line">execute job2</span><br></pre></td></tr></table></figure></p>
-<p>ScheduledExecutorService的两种常用方法：</p>
-<ul>
-<li><code>scheduleAtFixedRate</code>:每次执行时间为上一次任务开始起向后推一个时间间隔，即每次执行时间为 :<code>initialDelay</code>, <code>initialDelay+period</code>, <code>initialDelay+2*period</code>, <code>...</code>；</li>
-<li><code>scheduleWithFixedDelay</code>:每次执行时间为上一次任务结束起向后推一个时间间隔，即每次执行时间为：<code>initialDelay</code>, <code>initialDelay+executeTime+delay</code>, <code>initialDelay+2*executeTime+2*delay</code>。<blockquote>
-<p>由此可见，ScheduleAtFixedRate是基于固定时间间隔进行任务调度，ScheduleWithFixedDelay取决于每次任务执行的时间长短，是基于不固定时间间隔进行任务调度。</p>
-</blockquote>
-</li>
-</ul>
-<h2 id="Quartz"><a href="#Quartz" class="headerlink" title="Quartz"></a>Quartz</h2><p>Quartz可以说是使用相当广泛的任务调度框架了，它够支持更多更负责的调度需求，同时Quartz在设计上将<code>Job</code>和<code>Trigger</code>分离实现了松耦合，这大大增强了任务配置的灵活性</p>
-<h3 id="简单的例子"><a href="#简单的例子" class="headerlink" title="简单的例子"></a>简单的例子</h3><p>用 Quartz 实现每星期二 16:38 的调度安排：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.ibm.scheduler;</span><br><span class="line"><span class="keyword">import</span> java.util.Date;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.quartz.Job;</span><br><span class="line"><span class="keyword">import</span> org.quartz.JobDetail;</span><br><span class="line"><span class="keyword">import</span> org.quartz.JobExecutionContext;</span><br><span class="line"><span class="keyword">import</span> org.quartz.JobExecutionException;</span><br><span class="line"><span class="keyword">import</span> org.quartz.Scheduler;</span><br><span class="line"><span class="keyword">import</span> org.quartz.SchedulerFactory;</span><br><span class="line"><span class="keyword">import</span> org.quartz.Trigger;</span><br><span class="line"><span class="keyword">import</span> org.quartz.helpers.TriggerUtils;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">QuartzTest</span> <span class="keyword">implements</span> <span class="title">Job</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="comment">//该方法实现需要执行的任务</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">execute</span><span class="params">(JobExecutionContext arg0)</span> <span class="keyword">throws</span> JobExecutionException </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"Generating report - "</span></span><br><span class="line">                + arg0.getJobDetail().getFullName() + <span class="string">", type ="</span></span><br><span class="line">                + arg0.getJobDetail().getJobDataMap().get(<span class="string">"type"</span>));</span><br><span class="line">        System.out.println(<span class="keyword">new</span> Date().toString());</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="comment">// 创建一个Scheduler</span></span><br><span class="line">            SchedulerFactory schedFact = <span class="keyword">new</span> org.quartz.impl.StdSchedulerFactory();</span><br><span class="line">            Scheduler sched = schedFact.getScheduler();</span><br><span class="line">            sched.start();</span><br><span class="line">            <span class="comment">// 创建一个JobDetail，指明name，groupname，以及具体的Job类名，</span></span><br><span class="line">            <span class="comment">//该Job负责定义需要执行任务</span></span><br><span class="line">            JobDetail jobDetail = <span class="keyword">new</span> JobDetail(<span class="string">"myJob"</span>, <span class="string">"myJobGroup"</span>,</span><br><span class="line">                    QuartzTest.class);</span><br><span class="line">            jobDetail.getJobDataMap().put(<span class="string">"type"</span>, <span class="string">"FULL"</span>);</span><br><span class="line">            <span class="comment">// 创建一个每周触发的Trigger，指明星期几几点几分执行</span></span><br><span class="line">            Trigger trigger = TriggerUtils.makeWeeklyTrigger(<span class="number">3</span>, <span class="number">16</span>, <span class="number">38</span>);</span><br><span class="line">            trigger.setGroup(<span class="string">"myTriggerGroup"</span>);</span><br><span class="line">            <span class="comment">// 从当前时间的下一秒开始执行</span></span><br><span class="line">            trigger.setStartTime(TriggerUtils.getEvenSecondDate(<span class="keyword">new</span> Date()));</span><br><span class="line">            <span class="comment">// 指明trigger的name</span></span><br><span class="line">            trigger.setName(<span class="string">"myTrigger"</span>);</span><br><span class="line">            <span class="comment">// 用scheduler将JobDetail与Trigger关联在一起，开始调度任务</span></span><br><span class="line">            sched.scheduleJob(jobDetail, trigger);</span><br><span class="line"></span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>结果：<br><figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Generating report - myJobGroup.myJob, type =FULL</span><br><span class="line">Tue Feb 8 16:38:00 CST 2011</span><br><span class="line">Generating report - myJobGroup.myJob, type =FUL</span><br><span class="line">Tue Feb 15 16:38:00 CST 2011</span><br></pre></td></tr></table></figure></p>
-<p>非常简洁地实现了一个复杂的任务调度。Quartz 设计的核心类包括 Scheduler, Job 以及Trigger。其中，Job负责定义需要执行的任务，Trigger 负责设置调度策略，Scheduler 将二者组装在一起，并触发任务开始执行。</p>
-<h3 id="Job"><a href="#Job" class="headerlink" title="Job"></a>Job</h3><p>只需要创建一个 Job 的继承类，实现 execute 方法。JobDetail 负责封装 Job 以及 Job 的属性，并将其提供给 Scheduler 作为参数。每次 Scheduler 执行任务时，首先会创建一个 Job 的实例，然后再调用 execute 方法执行。<br>Quartz 没有为 Job 设计带参数的构造函数，因此需要通过额外的 JobDataMap 来存储 Job 的属性。JobDataMap 可以存储任意数量的 Key，Value 对，例如：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">jobDetail.getJobDataMap().put(<span class="string">"myDescription"</span>, <span class="string">"my job description"</span>); </span><br><span class="line">jobDetail.getJobDataMap().put(<span class="string">"myValue"</span>, <span class="number">1998</span>); </span><br><span class="line">ArrayList&lt;String&gt; list = <span class="keyword">new</span> ArrayList&lt;String&gt;(); </span><br><span class="line">list.add(<span class="string">"item1"</span>); </span><br><span class="line">jobDetail.getJobDataMap().put(<span class="string">"myArray"</span>, list);</span><br></pre></td></tr></table></figure></p>
-<p>JobDataMap 中的数据可以通过下面的方式获取：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JobDataMapTest</span> <span class="keyword">implements</span> <span class="title">Job</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">execute</span><span class="params">(JobExecutionContext context)</span></span></span><br><span class="line"><span class="function">            <span class="keyword">throws</span> JobExecutionException </span>&#123;</span><br><span class="line">        <span class="comment">//从context中获取instName，groupName以及dataMap</span></span><br><span class="line">        String instName = context.getJobDetail().getName();</span><br><span class="line">        String groupName = context.getJobDetail().getGroup();</span><br><span class="line">        JobDataMap dataMap = context.getJobDetail().getJobDataMap();</span><br><span class="line">        <span class="comment">//从dataMap中获取myDescription，myValue以及myArray</span></span><br><span class="line">        String myDescription = dataMap.getString(<span class="string">"myDescription"</span>);</span><br><span class="line">        <span class="keyword">int</span> myValue = dataMap.getInt(<span class="string">"myValue"</span>);</span><br><span class="line">        ArrayList&lt;String&gt; myArray = (ArrayListlt;Strin&gt;) dataMap.get(<span class="string">"myArray"</span>);</span><br><span class="line">        System.out.println(<span class="string">"</span></span><br><span class="line"><span class="string">                Instance ="</span> + instName + <span class="string">", group = "</span> + groupName</span><br><span class="line">                + <span class="string">", description = "</span> + myDescription + <span class="string">", value ="</span> + myValue</span><br><span class="line">                + <span class="string">", array item0 = "</span> + myArray.get(<span class="number">0</span>));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h3 id="Trigger"><a href="#Trigger" class="headerlink" title="Trigger"></a>Trigger</h3><p>Trigger 的作用是设置调度策略。Quartz 设计了多种类型的 Trigger，其中最常用的是 <code>SimpleTrigger</code> 和 <code>CronTrigger</code>。</p>
-<h4 id="SimpleTrigger"><a href="#SimpleTrigger" class="headerlink" title="SimpleTrigger"></a>SimpleTrigger</h4><p>SimpleTrigger 适用于在某一特定的时间执行一次，或者在某一特定的时间以某一特定时间间隔执行多次。上述功能决定了 SimpleTrigger 的参数包括 <code>start-time</code>, <code>end-time</code>, <code>repeat count</code>, 以及 <code>repeat interval</code>。</p>
-<ul>
-<li><p><code>Repeat count</code>: 重复次数取值为大于或等于零的整数，或者常量 SimpleTrigger.REPEAT_INDEFINITELY。</p>
-</li>
-<li><p><code>Repeat interval</code>: 执行间隔取值为大于或等于零的长整型。当 <code>Repeat interval</code> 取值为0并且 <code>Repeat count</code>取值大于零时，将会触发任务的并发执行。</p>
-</li>
-<li><p><code>Start-time</code> 与 e<code>nd-time</code> 取值为 java.util.Date。当同时指定 <code>end-time</code> 与 <code>repeat count</code> 时，优先考虑 <code>end-time</code>。一般地，可以指定 <code>end-time</code>，并设定 <code>repeat count</code> 为 REPEAT_INDEFINITELY。</p>
-</li>
-</ul>
-<p>以下是 SimpleTrigger 的构造方法：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">SimpleTrigger</span><span class="params">(String name, </span></span></span><br><span class="line"><span class="function"><span class="params">                      String group, </span></span></span><br><span class="line"><span class="function"><span class="params">                      Date startTime, </span></span></span><br><span class="line"><span class="function"><span class="params">                      Date endTime, </span></span></span><br><span class="line"><span class="function"><span class="params">                      <span class="keyword">int</span> repeatCount, </span></span></span><br><span class="line"><span class="function"><span class="params">                      <span class="keyword">long</span> repeatInterval)</span></span></span><br></pre></td></tr></table></figure></p>
-<h4 id="CronTrigger"><a href="#CronTrigger" class="headerlink" title="CronTrigger"></a>CronTrigger</h4><p><code>CronTrigger</code> 的用途更广，相比基于特定时间间隔进行调度安排的 SimpleTrigger，CronTrigger 主要适用于基于日历的调度安排。例如：每星期二的 16:38:10 执行，每月一号执行，以及更复杂的调度安排等。<br>CronTrigger 同样需要指定 start-time 和 end-time，其核心在于 Cron 表达式,由七个字段组成（补充中有关于Cron表达式的说明）<br><figure class="highlight excel"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Seconds </span><br><span class="line">Minutes </span><br><span class="line">Hours </span><br><span class="line"><span class="built_in">Day</span>-of-<span class="built_in">Month</span> </span><br><span class="line"><span class="built_in">Month</span> </span><br><span class="line"><span class="built_in">Day</span>-of-Week </span><br><span class="line"><span class="built_in">Year</span> (Optional field)</span><br></pre></td></tr></table></figure></p>
-<p>Job 与 Trigger 的松耦合设计是 Quartz 的一大特点，其优点在于同一个 Job 可以绑定多个不同的 Trigger，同一个 Trigger 也可以调度多个 Job，灵活性很强。</p>
-<h3 id="Listener"><a href="#Listener" class="headerlink" title="Listener"></a>Listener</h3><p>除了上述基本的调度功能，Quartz 还提供了 listener 的功能。主要包含三种 listener：JobListener，TriggerListener 以及 SchedulerListener。当系统发生故障，相关人员需要被通知时，Listener 便能发挥它的作用。最常见的情况是，当任务被执行时，系统发生故障，Listener 监听到错误，立即发送邮件给管理员。下面给出 JobListener 的实例：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.quartz.JobExecutionContext;</span><br><span class="line"><span class="keyword">import</span> org.quartz.JobExecutionException;</span><br><span class="line"><span class="keyword">import</span> org.quartz.JobListener;</span><br><span class="line"><span class="keyword">import</span> org.quartz.SchedulerException;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyListener</span> <span class="keyword">implements</span> <span class="title">JobListener</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"My Listener"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">jobWasExecuted</span><span class="params">(JobExecutionContext context,</span></span></span><br><span class="line"><span class="function"><span class="params">            JobExecutionException jobException)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(jobException != <span class="keyword">null</span>)&#123;</span><br><span class="line">            <span class="keyword">try</span> &#123;</span><br><span class="line">                <span class="comment">//停止Scheduler</span></span><br><span class="line">                context.getScheduler().shutdown();</span><br><span class="line">                System.out.println(<span class="string">"Error occurs when executing jobs, shut down the scheduler "</span>);</span><br><span class="line">                <span class="comment">// 给管理员发送邮件…</span></span><br><span class="line">            &#125; <span class="keyword">catch</span> (SchedulerException e) &#123;</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>使用者只需要创建一个 JobListener 的继承类，重载需要触发的方法即可。当然，需要将 listener 的实现类注册到 Scheduler 和 JobDetail 中：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sched.addJobListener(<span class="keyword">new</span> MyListener()); </span><br><span class="line">jobDetail.addJobListener(<span class="string">"My Listener"</span>); <span class="comment">// listener 的名字</span></span><br></pre></td></tr></table></figure></p>
-<p>也可以将 listener 注册为全局 listener，这样便可以监听 scheduler 中注册的所有任务 :<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sched.addGlobalJobListener(<span class="keyword">new</span> MyListener());</span><br></pre></td></tr></table></figure></p>
-<h3 id="JobStores"><a href="#JobStores" class="headerlink" title="JobStores"></a>JobStores</h3><p>Quartz的另一显著优点在于持久化，即将任务调度的相关数据保存下来。这样，当系统重启后，任务被调度的状态依然存在于系统中，不会丢失。默认情况 下，Quartz采用的是org.quartz.simpl.RAMJobStore，在这种情况下，数据仅能保存在内存中，系统重启后会全部丢失。若想持久化数据，需要采用 org.quartz.simpl.JDBCJobStoreTX。<br>实现持久化的第一步，是要创建 Quartz 持久化所需要的表格。在 Quartz 的发布包 docs/dbTables 中可以找到相应的表格创建脚本。Quartz 支持目前大部分流行的数据库。本文以 DB2 为例，所需要的脚本为 tables_db2.sql。首先需要对脚本做一点小的修改，即在开头指明 Schema：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SET</span> <span class="keyword">CURRENT</span> <span class="keyword">SCHEMA</span> quartz;</span><br></pre></td></tr></table></figure></p>
-<p>然后创建数据库 sched，执行 tables_db2.sql 创建持久化所需要的表格。</p>
-<p>第二步，配置数据源。数据源与其它所有配置，例如 ThreadPool，均放在 quartz.properties 里：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"># Configure ThreadPool </span><br><span class="line"> org.quartz.threadPool.class = org.quartz.simpl.SimpleThreadPool </span><br><span class="line"> org.quartz.threadPool.threadCount =  5 </span><br><span class="line"> org.quartz.threadPool.threadPriority = 4 </span><br><span class="line"></span><br><span class="line"> # Configure Datasources </span><br><span class="line"> org.quartz.jobStore.class = org.quartz.impl.jdbcjobstore.JobStoreTX </span><br><span class="line"> org.quartz.jobStore.driverDelegateClass = org.quartz.impl.jdbcjobstore.StdJDBCDelegate </span><br><span class="line"> org.quartz.jobStore.dataSource = db2DS </span><br><span class="line"> org.quartz.jobStore.tablePrefix = QRTZ_ </span><br><span class="line"></span><br><span class="line"> org.quartz.dataSource.db2DS.driver = com.ibm.db2.jcc.DB2Driver </span><br><span class="line"> org.quartz.dataSource.db2DS.URL = jdbc:db2://localhost:50001/sched </span><br><span class="line"> org.quartz.dataSource.db2DS.user = quartz </span><br><span class="line"> org.quartz.dataSource.db2DS.password = passw0rd </span><br><span class="line"> org.quartz.dataSource.db2DS.maxConnections = 5</span><br></pre></td></tr></table></figure></p>
-<p>使用时只需要将 quatz.properties 放在 classpath 下面，再次运行之前的任务调度实例，trigger、job 等信息便会被记录在数据库中。重启服务后将数据库中记录的任务调度数据重新导入程序运行：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.ibm.scheduler;</span><br><span class="line"><span class="keyword">import</span> org.quartz.Scheduler;</span><br><span class="line"><span class="keyword">import</span> org.quartz.SchedulerException;</span><br><span class="line"><span class="keyword">import</span> org.quartz.SchedulerFactory;</span><br><span class="line"><span class="keyword">import</span> org.quartz.Trigger;</span><br><span class="line"><span class="keyword">import</span> org.quartz.impl.StdSchedulerFactory;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">QuartzReschedulerTest</span></span>&#123; </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[]args)</span> <span class="keyword">throws</span> SchedulerException</span>&#123; </span><br><span class="line">    <span class="comment">//初始化一个 Schedule Factory </span></span><br><span class="line">    SchedulerFactory schedulerFactory = <span class="keyword">new</span> StdSchedulerFactory();</span><br><span class="line">    <span class="comment">//从 schedule factory 中获取 scheduler </span></span><br><span class="line">    Scheduler scheduler = schedulerFactory.getScheduler(); </span><br><span class="line">    <span class="comment">// 从 schedule factory 中获取 trigger </span></span><br><span class="line">    Trigger trigger = scheduler.getTrigger(<span class="string">"myTrigger"</span>,<span class="string">"myTriggerGroup"</span>);</span><br><span class="line">    <span class="comment">// 重新开启调度任务</span></span><br><span class="line">    scheduler.rescheduleJob(<span class="string">"myTrigger"</span>,</span><br><span class="line">    <span class="string">"myTriggerGroup"</span>,</span><br><span class="line">     trigger); </span><br><span class="line">    scheduler.start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>上面代码中，schedulerFactory.getScheduler() 将 quartz.properties 的内容加载到内存，然后根据数据源的属性初始化数据库的链接，并将数据库中存储的数据加载到内存。之后，便可以在内存中查询某一具体的 trigger，并将其重新启动。这时候重新查询 qrtz_simple_triggers 中的数据，发现 times_triggered 值比原来增长了。</p>
-<h2 id="JCronTab"><a href="#JCronTab" class="headerlink" title="JCronTab"></a>JCronTab</h2><p>Crontab 是一个非常方便的用于 unix/linux 系统的任务调度命令。JCronTab 则是一款完全按照 crontab 语法编写的 java 任务调度工具。</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>对于简单的基于起始时间点与时间间隔的任务调度，使用 Timer 就足够了；如果需要同时调度多个任务，基于线程池的 ScheduledTimer 是更为合适的选择；当任务调度的策略复杂到难以凭借起始时间点与时间间隔来描述时，Quartz 与 JCronTab 则体现出它们的优势。熟悉 Unix/Linux 的开发人员更倾向于 JCronTab，且 JCronTab 更适合与 Web 应用服务器相结合。Quartz 的 Trigger 与 Job 松耦合设计使其更适用于 Job 与 Trigger 的多对多应用场景。</p>
-<h2 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h2><h3 id="Spring-Boot集成Quartz"><a href="#Spring-Boot集成Quartz" class="headerlink" title="Spring Boot集成Quartz"></a>Spring Boot集成Quartz</h3><h3 id="cronExpression表达式介绍"><a href="#cronExpression表达式介绍" class="headerlink" title="cronExpression表达式介绍"></a>cronExpression表达式介绍</h3><table>
-<thead>
-<tr>
-<th>字段</th>
-<th>允许值</th>
-<th>允许的特殊字符</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>秒</td>
-<td>0-59</td>
-<td>, - * /</td>
-</tr>
-<tr>
-<td>分</td>
-<td>0-59</td>
-<td>, - * /</td>
-</tr>
-<tr>
-<td>小时</td>
-<td>0-23</td>
-<td>, - * /</td>
-</tr>
-<tr>
-<td>日期</td>
-<td>1-31</td>
-<td>, - *   / L W C</td>
-</tr>
-<tr>
-<td>月份</td>
-<td>1-12 或者 JAN-DEC</td>
-<td>, - * /</td>
-</tr>
-<tr>
-<td>星期</td>
-<td>1-7 或者 SUN-SAT</td>
-<td>, - *   / L C #</td>
-</tr>
-<tr>
-<td>年（可选）</td>
-<td>留空, 1970-2099</td>
-<td>, - * /</td>
-</tr>
-</tbody>
-</table>
-<p>如上面的表达式所示: </p>
-<p>“*”字符被用来指定所有的值。如：”*“在分钟的字段域里表示“每分钟”。 </p>
-<p>“-”字符被用来指定一个范围。如：“10-12”在小时域意味着“10点、11点、12点”。</p>
-<p>“,”字符被用来指定另外的值。如：“MON,WED,FRI”在星期域里表示”星期一、星期三、星期五”. </p>
-<p>“?”字符只在日期域和星期域中使用。它被用来指定“非明确的值”。当你需要通过在这两个域中的一个来指定一些东西的时候，它是有用的。看下面的例子你就会明白。 </p>
-<p>“L”字符指定在月或者星期中的某天（最后一天）。即“Last ”的缩写。但是在星期和月中“Ｌ”表示不同的意思，如：在月子段中“L”指月份的最后一天-1月31日，2月28日，如果在星期字段中则简单的表示为“7”或者“SAT”。如果在星期字段中在某个value值得后面，则表示“某月的最后一个星期value”,如“6L”表示某月的最后一个星期五。</p>
-<p>“W”字符只能用在月份字段中，该字段指定了离指定日期最近的那个星期日。</p>
-<p>“#”字符只能用在星期字段，该字段指定了第几个星期value在某月中</p>
-<p>每一个元素都可以显式地规定一个值（如6），一个区间（如9-12），一个列表（如9，11，13）或一个通配符（如*）。“月份中的日期”和“星期中的日期”这两个元素是互斥的，因此应该通过设置一个问号（？）来表明你不想设置的那个字段。表7.1中显示了一些cron表达式的例子和它们的意义：</p>
-<table>
-<thead>
-<tr>
-<th>表达式</th>
-<th>意义</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>“0 0 12 <em> </em> ?”</td>
-<td>每天中午12点触发</td>
-</tr>
-<tr>
-<td>“0 15 10 ? <em> </em>“</td>
-<td>每天上午10:15触发</td>
-</tr>
-<tr>
-<td>“0 15 10 <em> </em> ?”</td>
-<td>每天上午10:15触发</td>
-</tr>
-<tr>
-<td>“0 15 10 <em> </em> ? *”</td>
-<td>每天上午10:15触发</td>
-</tr>
-<tr>
-<td>“0 15 10 <em> </em> ? 2005”</td>
-<td>2005年的每天上午10:15触发</td>
-</tr>
-<tr>
-<td>“0 <em> 14 </em> * ?”</td>
-<td>在每天下午2点到下午2:59期间的每1分钟触发</td>
-</tr>
-<tr>
-<td>“0 0/5 14 <em> </em> ?”</td>
-<td>在每天下午2点到下午2:55期间的每5分钟触发</td>
-</tr>
-<tr>
-<td>“0 0/5 14,18 <em> </em> ?”</td>
-<td>在每天下午2点到2:55期间和下午6点到6:55期间的每5分钟触发</td>
-</tr>
-<tr>
-<td>“0 0-5 14 <em> </em> ?”</td>
-<td>在每天下午2点到下午2:05期间的每1分钟触发</td>
-</tr>
-<tr>
-<td>“0 10,44 14 ? 3 WED”</td>
-<td>每年三月的星期三的下午2:10和2:44触发</td>
-</tr>
-<tr>
-<td>“0 15 10 ? * MON-FRI”</td>
-<td>周一至周五的上午10:15触发</td>
-</tr>
-<tr>
-<td>“0 15 10 15 * ?”</td>
-<td>每月15日上午10:15触发</td>
-</tr>
-<tr>
-<td>“0 15 10 L * ?”</td>
-<td>每月最后一日的上午10:15触发</td>
-</tr>
-<tr>
-<td>“0 15 10 ? * 6L”</td>
-<td>每月的最后一个星期五上午10:15触发</td>
-</tr>
-<tr>
-<td>“0 15 10 ? * 6L 2002-2005”</td>
-<td>2002年至2005年的每月的最后一个星期五上午10:15触发</td>
-</tr>
-<tr>
-<td>“0 15 10 ? * 6#3”</td>
-<td>每月的第三个星期五上午10:15触发</td>
-</tr>
-</tbody>
-</table>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/08/09/Java任务调度框架/#more" rel="contents">
@@ -681,6 +537,37 @@
 
           
 
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  
+                </span>
+              
+            </div>
           
 
           
@@ -834,6 +721,37 @@
           
 
           
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  
+                </span>
+              
+            </div>
+          
 
           
 
@@ -857,84 +775,6 @@
 <figure class="highlight haml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-<span class="ruby"> 第一阶段，刚接触Blog，觉得很新鲜，试着选择一个免费空间来写。</span></span><br><span class="line"><span class="ruby">- 第二阶段，发现免费空间限制太多，就自己购买域名和空间，搭建独立博客。</span></span><br><span class="line"><span class="ruby">- 第三阶段，觉得独立博客的管理太麻烦，最好在保留控制权的前提下，让别人来管，自己只负责写文章。</span></span><br></pre></td></tr></table></figure>
 <p>由于平时比较懒所以第一、第二阶段虽然都经历过但都没坚持下来（理由吗、、、有很多），平时更多的是通过印象笔记之类的进行知识梳理及记录，但这种三方记录软件存在太多的限制，机缘巧合下遇上了hexo，擦！这不是就是我要找的吗，赶紧拿来学习！说来也惭愧用了这么多年的github直到今天才知道github pages的存在“众里寻他千百度，蓦然回首那人却在灯火阑珊处”说的就是我此时的心情吧。</p>
 <p>网上对于如何使用hexo结合github pages搭建私有博客已经有很多教程，本文的目的只是做些简要的记录不做详细说明。<strong>对于_config.yml的说明：hexo的位于根目录下<code>站点配置文件</code>，<code>主题配置文件</code>在对应的主题目录下</strong></p>
-<h2 id="GitHub-Pages"><a href="#GitHub-Pages" class="headerlink" title="GitHub Pages"></a>GitHub Pages</h2><blockquote>
-<p>Github Pages 是面向用户、组织和项目开放的公共静态页面搭建托管服务，站点可以被免费托管在 Github 上，你可以选择使用 Github Pages 默认提供的域名 github.io 或者自定义域名来发布站点。Github Pages 支持 自动利用 Jekyll 生成站点，也同样支持纯 HTML 文档，将你的 Jekyll 站 点托管在 Github Pages 上是一个不错的选择。</p>
-</blockquote>
-<p>其实对于github pages的创建没什么可说的只需要创建一个“账号名+github.io”的仓库即可。创建完成后即可通过<a href="https://cjlovepp.github.io进行访问。" target="_blank" rel="noopener">https://cjlovepp.github.io进行访问。</a></p>
-<h2 id="hexo安装配置"><a href="#hexo安装配置" class="headerlink" title="hexo安装配置"></a>hexo安装配置</h2><p>要使用Hexo，需要在你的系统中支持Nodejs以及Git，如果还没有，ennnnn~~~装呗！</p>
-<h3 id="安装Node-js"><a href="#安装Node-js" class="headerlink" title="安装Node.js"></a>安装Node.js</h3><h3 id="安装Git"><a href="#安装Git" class="headerlink" title="安装Git"></a>安装Git</h3><h3 id="安装Hexo"><a href="#安装Hexo" class="headerlink" title="安装Hexo"></a>安装Hexo</h3><p>关于Hexo的详细使用说明文档参考：<a href="https://hexo.io/zh-cn/docs/commands" target="_blank" rel="noopener">https://hexo.io/zh-cn/docs/commands</a></p>
-<ul>
-<li>创建一个空的文件夹（该文件夹用于站点的发布，所以最好不要随便放）</li>
-<li>Git Bash进入之前创建的目录</li>
-</ul>
-<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-cli -g   </span><br><span class="line">hexo init #初始化网站   </span><br><span class="line">npm install   </span><br><span class="line">hexo g #生成或 hexo generate   </span><br><span class="line">hexo s #启动本地服务器 或者 hexo server,这一步之后就可以通过http://localhost:4000  查看了</span><br></pre></td></tr></table></figure>
-<h2 id="部署到GitHub"><a href="#部署到GitHub" class="headerlink" title="部署到GitHub"></a>部署到GitHub</h2><p>通过设置”_config.yml”文件中的<code>deploy</code>来配置githup仓库地址，github提交时支持用户名密码和SSH Key两种方式,这里介绍SSH的配置方式</p>
-<h3 id="检查SSH-keys设置"><a href="#检查SSH-keys设置" class="headerlink" title="检查SSH keys设置"></a>检查SSH keys设置</h3><p>进入git bash<br><figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">cd ~/.ssh</span><br><span class="line">ls</span><br><span class="line"><span class="meta">#</span><span class="bash">如果文件存在直接打开`*.pub`复制内容即可，如果没有则自己生成一个</span></span><br><span class="line">ssh-keygen -t rsa -C "邮件地址@youremail.com" #生成新的key文件,邮箱地址填你的Github地址</span><br><span class="line"><span class="meta">#</span><span class="bash">Enter file <span class="keyword">in</span> <span class="built_in">which</span> to save the key (/Users/your_user_directory/.ssh/id_rsa):&lt;回车就好&gt;</span></span><br><span class="line"><span class="meta">#</span><span class="bash">接下来会让你输入密码（直接回车也可以）</span></span><br></pre></td></tr></table></figure></p>
-<h3 id="添加SSH-Key到Github"><a href="#添加SSH-Key到Github" class="headerlink" title="添加SSH Key到Github"></a>添加SSH Key到Github</h3><p>进入github首页找到对应的repository，进入<code>setting</code>将key添加到<code>deploy keys</code>中。<br><figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">测试是否成功</span></span><br><span class="line">ssh -T git@github.com</span><br><span class="line"><span class="meta">#</span><span class="bash">之后会要你输入yes/no,输入yes就好了。</span></span><br></pre></td></tr></table></figure></p>
-<h3 id="部署到github"><a href="#部署到github" class="headerlink" title="部署到github"></a>部署到github</h3><figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo d</span><br></pre></td></tr></table></figure>
-<p>没错，就是这么简单。结束！</p>
-<h2 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h2><h3 id="图片存储解决"><a href="#图片存储解决" class="headerlink" title="图片存储解决"></a>图片存储解决</h3><p>写技术类文章没有图片怎么行？一张到位的图片能省去大篇幅的文字说明（还不一定说的清），所以博客中插入图片便成了刚需，那么问题来了图片存哪合适呢？网上通用的解决方案 <code>七牛云</code> 我也曾用过一段时间，说实在的问题是解决了但体验并不是很好（每次要把图片先上传到七牛的服务器然后再使用），所以果断放弃！<br>在hexo发展至今都没有一个好的图片解决方案？开什么玩笑—-<code>hexo-asset-image</code>，对喽就是这货，来看看具体怎么用吧。</p>
-<ul>
-<li><p>首先确认<code>_config.yml</code> 中开启 <code>post_asset_folder:true</code>。<br>Hexo 提供了一种更方便管理 Asset 的设定：<code>post_asset_folder</code>当您设置post_asset_folder为true参数后，在建立文件时，Hexo会自动建立一个与文章同名的文件夹，您可以把与该文章相关的所有资源都放到那个文件夹，如此一来，您便可以更方便的使用资源。</p>
-</li>
-<li><p>安装 <code>hexo-asset-image</code></p>
-<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-asset-image --save</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>完成安装后用hexo新建文章的时候会发现_posts目录下面会多出一个和文章名字一样的文件夹。图片就可以放在文件夹下面。结构如下：</p>
-<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">本地图片测试</span><br><span class="line">├── apppicker.jpg</span><br><span class="line">├── logo.jpg</span><br><span class="line">└── rules.jpg</span><br><span class="line">本地图片测试.<span class="built_in">md</span></span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>这样的目录结构（目录名和文章名一致），只要使用 <code>![logo](本地图片测试/logo.jpg)</code> 就可以插入图片。<br>生成的结构为<br><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public/<span class="number">2016</span>/<span class="number">3</span>/<span class="number">9</span>/本地图片测试</span><br><span class="line">├── apppicker.jpg</span><br><span class="line">├── index.html</span><br><span class="line">├── logo.jpg</span><br><span class="line">└── rules.jpg</span><br></pre></td></tr></table></figure></p>
-<p>同时，生成的 html 是</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"/2016/3/9/本地图片测试/logo.jpg"</span> <span class="attr">alt</span>=<span class="string">"logo"</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>而不是<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"本地图片测试/logo.jpg"</span> <span class="attr">alt</span>=<span class="string">"logo"</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
-<blockquote>
-<p>这种方式存在一个明显的弊端就是随着使用git会越来越大，但就目前我的需求来讲暂时不用考虑这些问题</p>
-</blockquote>
-<h3 id="hexo主题配置"><a href="#hexo主题配置" class="headerlink" title="hexo主题配置"></a>hexo主题配置</h3><p>hexo只是很多主题获取主题的方式当然是通过官网 <a href="https://hexo.io/themes/" target="_blank" rel="noopener">主题</a>，如何启用主题都有对应的说明此处不多废话，进过精挑细后还是觉定采用社区比较认可的<code>NexT</code>,详细的使用说明可以参考 <a href="http://theme-next.iissnan.com/" target="_blank" rel="noopener">中文文档</a></p>
-<h3 id="hexo插件"><a href="#hexo插件" class="headerlink" title="hexo插件"></a>hexo插件</h3><p>可以去 <a href="https://hexo.io/plugins/" target="_blank" rel="noopener">插件</a> 找到很多有用的插件</p>
-<h3 id="添加【分类，标签】等功能"><a href="#添加【分类，标签】等功能" class="headerlink" title="添加【分类，标签】等功能"></a>添加【分类，标签】等功能</h3><p>hexo可以对博客进行标签分类，侧边栏添加并实现分类和标签功能的做法类似，这里以<code>分类</code>为例</p>
-<ul>
-<li>创建分类显示页面<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new page categories</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>你会发现你的source文件夹下有了categorcies/index.md，之所以命名为categories的原因是在next主题的配置文件中，categories是关键词。</p>
-<ul>
-<li>编辑新建界面，将页面类型设置为categories，主题将会在这个页面上显示所有的分类：<figure class="highlight md"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: categories</span><br><span class="line">date: 2018-03-02 12:33:16</span><br><span class="line">type: "categories" //这点尤为重要否则分类页是空的</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>另外就是，需要注意一点：如果有启用多说 或者 Disqus 评论，默认页面也会带有评论。需要关闭的话，请添加字段 comments 并将值设置为 false，如：<br><figure class="highlight md"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: categories</span><br><span class="line">date: 2018-03-02 12:33:16</span><br><span class="line">type: "categories"</span><br><span class="line">comments: false</span><br><span class="line">---</span><br></pre></td></tr></table></figure></p>
-<ul>
-<li><p>在菜单中添加链接，此时需要编辑主题的_config.yml，hexo的配置文件事先写好了，但是处于注释状态，需要去除注释即可：</p>
-<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">menu:</span></span><br><span class="line"><span class="attr">  home:</span> <span class="string">/</span> <span class="string">||</span> <span class="string">home</span></span><br><span class="line"><span class="attr">  about:</span> <span class="string">/about/</span> <span class="string">||</span> <span class="string">user</span></span><br><span class="line"><span class="attr">  tags:</span> <span class="string">/tags/</span> <span class="string">||</span> <span class="string">tags</span></span><br><span class="line"><span class="attr">  categories:</span> <span class="string">/categories/</span> <span class="string">||</span> <span class="string">th</span></span><br><span class="line"><span class="attr">  archives:</span> <span class="string">/archives/</span> <span class="string">||</span> <span class="string">archive</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>添加文章分类关联<br>把文章归入分类只需在文章的顶部标题下方添加categories字段，即可自动创建分类名并加入对应的分类中：</p>
-<figure class="highlight md"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">---</span><br><span class="line">title: hexo+github pages博客之路起航</span><br><span class="line">date: 2018-07-31 17:08:10</span><br><span class="line">tags:</span><br><span class="line"><span class="code">    - hexo</span></span><br><span class="line"><span class="code">    - github pages</span></span><br><span class="line">categories: hexo</span><br><span class="line">---</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h3 id="添加搜索"><a href="#添加搜索" class="headerlink" title="添加搜索"></a>添加搜索</h3><ul>
-<li><p>1、安装 hexo-generator-searchdb 插件</p>
-<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> npm install hexo-generator-searchdb --save</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>2、打开 <code>站点配置文件`</code> 找到Extensions在下面添加</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 搜索</span><br><span class="line">search:</span><br><span class="line">  path: search.xml</span><br><span class="line">  field: post</span><br><span class="line">  format: html</span><br><span class="line">  limit: 10000</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>3、打开 <code>主题配置文件`</code> 找到Local search，将enable设置为true</p>
-</li>
-</ul>
-<h3 id="添加阅读全文按钮"><a href="#添加阅读全文按钮" class="headerlink" title="添加阅读全文按钮"></a>添加阅读全文按钮</h3><p>因为在你的博客主页会有多篇文章，如果你想让你的文章只显示一部分，多余的可以点击阅读全文来查看，那么你需要在你的文章中添加<br><figure class="highlight md"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml"><span class="comment">&lt;!--more--&gt;</span></span></span><br></pre></td></tr></table></figure></p>
-<p>其后面的部分就不会显示了，只能点击阅读全文才能看</p>
-<h3 id="提交hexo源码到github"><a href="#提交hexo源码到github" class="headerlink" title="提交hexo源码到github"></a>提交hexo源码到github</h3><p>hexo在将网站发布到github时只是将生成的静态页同步到github中，而编写的文件源码（xxx.md）并不会上传到git。这样的话当我们数据损坏或者需要在别的地方编写时就会很尴尬。所以最好的方式是我们把hexo源代码也上传到github中。</p>
-<ul>
-<li><p>建立分支：因为 master 分支是存放 Hexo 博客生成的页面，所以只能创建一个分支来保存博客的源代码在你的 GitHub<br><img src="/2018/07/31/hexo-github-pages博客之路起航/20180802093931.png" alt=""></p>
-</li>
-<li><p>设置默认分支为 <code>hexo</code><br><strong>这里需要有注意站点配置文件 <code>_config.yml</code> 的 <code>deploy</code> 需要设置成 <code>master</code></strong></p>
-</li>
-<li><p>OK，提交到代码到 <code>hexo</code> 分支即可</p>
-</li>
-</ul>
-<h3 id="添加背景图片"><a href="#添加背景图片" class="headerlink" title="添加背景图片"></a>添加背景图片</h3><p>给hexo next添加背景图片，只需要在 <code>themes\next\source\css\_custom\custom.styl</code> 添加如下代码即可：<br><figure class="highlight styl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">@media screen and (<span class="attribute">min-width</span>:<span class="number">1200px</span>) &#123;</span><br><span class="line"></span><br><span class="line">    <span class="selector-tag">body</span> &#123;</span><br><span class="line">    background-image:url(/images/background.jpg);</span><br><span class="line">    <span class="attribute">background-repeat</span>: no-repeat;</span><br><span class="line">    <span class="attribute">background-attachment</span>:fixed;</span><br><span class="line">    <span class="attribute">background-position</span>:<span class="number">50%</span> <span class="number">50%</span>; </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="selector-id">#footer</span> <span class="selector-tag">a</span> &#123;</span><br><span class="line">        <span class="attribute">color</span>:<span class="number">#eee</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h3 id="自动部署到github-pages"><a href="#自动部署到github-pages" class="headerlink" title="自动部署到github pages"></a>自动部署到github pages</h3>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/07/31/hexo-github-pages博客之路起航/#more" rel="contents">
@@ -1090,6 +930,15 @@
   </span>
   <span class="author" itemprop="copyrightHolder">Cjlovepp</span>
 
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count"></span>
   
 </div>
 
