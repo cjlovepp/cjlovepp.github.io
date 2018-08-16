@@ -19,6 +19,8 @@ categories: hexo
 
 网上对于如何使用hexo结合github pages搭建私有博客已经有很多教程，本文的目的只是做些简要的记录不做详细说明。**对于_config.yml的说明：hexo的位于根目录下`站点配置文件`，`主题配置文件`在对应的主题目录下**
 
+<!--more-->
+
 ## GitHub Pages
 > Github Pages 是面向用户、组织和项目开放的公共静态页面搭建托管服务，站点可以被免费托管在 Github 上，你可以选择使用 Github Pages 默认提供的域名 github.io 或者自定义域名来发布站点。Github Pages 支持 自动利用 Jekyll 生成站点，也同样支持纯 HTML 文档，将你的 Jekyll 站 点托管在 Github Pages 上是一个不错的选择。
 
@@ -220,7 +222,27 @@ hexo在将网站发布到github时只是将生成的静态页同步到github中�
       }
   }
 ```
+### 字数统计
+用于统计文章的字数以及分析出阅读时间。
+- 添加`hexo-wordcount`插件
+```console
+  npm install hexo-wordcount --save
+```
+- 在`主题配置文件`中，搜索wordcount，设置为下面这样就可以了：
+```yml
+post_wordcount:
+  item_text: true
+  wordcount: true
+  min2read: true
+  totalcount: true
+  separated_meta: true
+```
+- 再打开`\themes\next\layout\_macro\post.swig` 文件，在`leancloud-visitors-count`后面位置添加一个分割符：
+```swig
+           <span class="leancloud-visitors-count"></span>
+       </span>
+       <span class="post-meta-divider">|</span>
+    {% endif %}
+```
 
 ### 自动部署到github pages
-
-<!--more-->
