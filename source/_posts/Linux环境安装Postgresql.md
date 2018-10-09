@@ -111,3 +111,45 @@ GRANT
 postsql默认安装后是监听本机127.0.0.1 默认端口是5432,是不能够远程登陆的，所以要修改监听主机地址postgresql数据库的配置文件是:postgresql.conf,所在位置是：postgresql初始化时所指定的data数据目录下：具体可参照上文的配置
 
 #### 重启postgresql服务生效：
+
+## 命令行下基础命令
+### 基础查看指令
+- 连接数据库，默认的用户和数据库postgres: `psql -U user -d dbname`
+- 切换数据库，相当于mysql的use dbname : `\c dbname`
+- 列举数据库，相当于mysql的show databases： `\l`
+- 列举表，相当于mysql的show tables ： `\dt`
+- 查看表结构，相当于desc tblname,show columns from tbname ：`\d tblname`
+- 查看索引 : `\di`
+- 退出 psql: `\q`
+
+### 数据库操作相关指令
+- 创建数据库： `create database [数据库名]`; 
+- 删除数据库： `drop database [数据库名]`;  
+- *重命名一个表： `alter table [表名A] rename to [表名B]`; 
+- *删除一个表： `drop table [表名]`;
+- *在已有的表里添加字段： `alter table [表名] add column [字段名] [类型]`; 
+- *删除表中的字段： `alter table [表名] drop column [字段名]`; 
+- *重命名一个字段：`alter table [表名] rename column [字段名A] to [字段名B]`; 
+- *给一个字段设置缺省值： `alter table [表名] alter column [字段名] set default [新的默认值]`;
+- *去除缺省值：`alter table [表名] alter column [字段名] drop default`; 
+- 在表中插入数据： `insert into 表名 ([字段名m],[字段名n],......) values ([列m的值],[列n的值],......)`; 
+- 修改表中的某行某列的数据： `update [表名] set [目标字段名]=[目标值] where [该行特征]`; 
+- 删除表中某行数据： `delete from [表名] where [该行特征]`; 
+- 删空整个表 : `delete from [表名]`;
+- 创建表： `create table ([字段名1] [类型1] ;,[字段名2] [类型2],......<,primary key (字段名m,字段名n,...)>;); `
+- 显示 PostgreSQL 的使用和发行条款 `\copyright`
+- 显示或设定用户端字元编码: `\encoding [字元编码名称]`
+- SQL 命令语法上的说明，用 * 显示全部命令 : `\h [名称]`
+
+
+### 备份还原相关指令
+可以使用pg_dump和pg_dumpall来完成。比如备份sales数据库： 
+pg_dump drupal>/opt/Postgresql/backup/1.bak 
+
+### 删除库的时候报错
+```console
+ERROR: database "temp_test_yang" is being accessed by other users
+DETAIL: There are 4 other sessions using the database.
+```
+说明该temp_test_yang库正在被人连接。解决方法是：查询出连接该数据库的进程，并将其杀死(比较暴力)
+select pg_terminate_backend(pid) from pg_stat_activity where DATNAME = 'temp_test_yang';
