@@ -91,7 +91,7 @@
 <meta property="og:image" content="http://yoursite.com/2018/08/22/redis-jedis使用管道-pipeline/pipeline.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/22/redis-jedis使用管道-pipeline/class.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/22/redis-jedis使用管道-pipeline/BinaryJedis.png">
-<meta property="og:image" content="http://yoursite.com/2018/08/22/redis-jedis使用管道-pipeline/Pipeline.png">
+<meta property="og:image" content="http://yoursite.com/2018/08/22/redis-jedis使用管道-pipeline/Pipline.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/22/redis-jedis使用管道-pipeline/set.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/22/redis-jedis使用管道-pipeline/getClient.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/22/redis-jedis使用管道-pipeline/sendCommand.png">
@@ -99,7 +99,7 @@
 <meta property="og:image" content="http://yoursite.com/2018/08/22/redis-jedis使用管道-pipeline/Queable.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/22/redis-jedis使用管道-pipeline/sync.png">
 <meta property="og:image" content="http://yoursite.com/2018/08/22/redis-jedis使用管道-pipeline/getMany.png">
-<meta property="og:updated_time" content="2018-08-22T12:28:36.026Z">
+<meta property="og:updated_time" content="2018-08-22T12:34:29.857Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="redis-jedis使用管道(pipeline)">
 <meta name="twitter:description" content="前言Redis的pipeline(管道)功能在命令行中没有，但redis是支持pipeline的，而且在各个语言版的client中都有相应的实现。 由于网络开销延迟，就算redis server端有很强的处理能力，也会由于收到的client消息少，而造成吞吐量小。当client 使用pipelining 发送命令时，redis server必须将部分请求放到队列中（使用内存），执行完毕后一次性发送">
@@ -436,7 +436,7 @@
 <h2 id="pipeline源码解读"><a href="#pipeline源码解读" class="headerlink" title="pipeline源码解读"></a>pipeline源码解读</h2><h3 id="Pipeline类的结构"><a href="#Pipeline类的结构" class="headerlink" title="Pipeline类的结构"></a>Pipeline类的结构</h3><p><img src="/2018/08/22/redis-jedis使用管道-pipeline/class.png" alt="Class"></p>
 <h3 id="Jedis的Pipeline的实现"><a href="#Jedis的Pipeline的实现" class="headerlink" title="Jedis的Pipeline的实现"></a>Jedis的Pipeline的实现</h3><p>看下上面的使用例子<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Pipeline p = redis.pipelined();</span><br><span class="line">....</span><br><span class="line"><span class="keyword">for</span>()&#123;</span><br><span class="line">    p.hmset(<span class="string">"key_"</span> + i, data);<span class="comment">//将命令缓存起来</span></span><br><span class="line">&#125;</span><br><span class="line">p.sync();</span><br></pre></td></tr></table></figure></p>
 <h4 id="获取Pipeline对象"><a href="#获取Pipeline对象" class="headerlink" title="获取Pipeline对象"></a>获取Pipeline对象</h4><p>BinaryJedis有一个成员变量pipeline，通过其pipeline()方法可以获取Pipeline对象</p>
-<p> <img src="/2018/08/22/redis-jedis使用管道-pipeline/BinaryJedis.png" alt="BinaryJedis"><br> 对的，就是它<br> <img src="/2018/08/22/redis-jedis使用管道-pipeline/Pipeline.png" alt="Pipeline"><br> pipeline()方法就干了一件事情，new了一个Pipeline对象，并设置了该对象的client属性！</p>
+<p> <img src="/2018/08/22/redis-jedis使用管道-pipeline/BinaryJedis.png" alt="BinaryJedis"><br> 对的，就是它<br> <img src="/2018/08/22/redis-jedis使用管道-pipeline/Pipline.png" alt="Pipline"><br> pipeline()方法就干了一件事情，new了一个Pipeline对象，并设置了该对象的client属性！</p>
 <h4 id="Pipeline对象set方法干了啥"><a href="#Pipeline对象set方法干了啥" class="headerlink" title="Pipeline对象set方法干了啥"></a>Pipeline对象set方法干了啥</h4><p>pipeline的set方法实际调用的是Pipelinebase类（Pipeline父类的父类）的set方法：<br><img src="/2018/08/22/redis-jedis使用管道-pipeline/set.png" alt="set"><br>而getClient调用子类的实现：<br><img src="/2018/08/22/redis-jedis使用管道-pipeline/getClient.png" alt="getClient"></p>
 <h4 id="调用client的set操作"><a href="#调用client的set操作" class="headerlink" title="调用client的set操作"></a>调用client的set操作</h4><p>调用client的set操作跟踪源码发现实际是调用了<code>sendCommand(Command.SET,key,value)</code>方法。<strong>注意了，所有的cmd与参数都写入了outputstream </strong><br><img src="/2018/08/22/redis-jedis使用管道-pipeline/sendCommand.png" alt="sendCommand"><br>Jedis定义了自己的输入流与输出流，现在所有的commands都在outputstream里面了，但是还没有传到redis客户端<br><img src="/2018/08/22/redis-jedis使用管道-pipeline/sendCommand2.png" alt="sendCommand2"></p>
 <h4 id="Pipeline对象sync方法干了啥"><a href="#Pipeline对象sync方法干了啥" class="headerlink" title="Pipeline对象sync方法干了啥"></a>Pipeline对象sync方法干了啥</h4><p>在上面Pipelinebase的set方法的最后了，调了一个getResponse()方法。该方法相当于把每一次的请求操作加入到一个Queue里面，这个队列有啥用？先放在这里！<br><img src="/2018/08/22/redis-jedis使用管道-pipeline/Queable.png" alt="Queable"><br>来看一下万恶的sync（）方法，注意红色的部分：<br><img src="/2018/08/22/redis-jedis使用管道-pipeline/sync.png" alt="sync"> </p>

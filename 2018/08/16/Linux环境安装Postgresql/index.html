@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Cjlovepp blogs">
 <meta property="og:description" content="前言 Linux版本：CentOS PostgresSQL版本：9.5.6">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-08-17T01:27:36.604Z">
+<meta property="og:updated_time" content="2018-09-18T02:25:43.781Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux环境安装Postgresql">
 <meta name="twitter:description" content="前言 Linux版本：CentOS PostgresSQL版本：9.5.6">
@@ -446,7 +446,38 @@
 </li>
 </ul>
 <h4 id="修改postgresql-conf文件中的端口和监听主机"><a href="#修改postgresql-conf文件中的端口和监听主机" class="headerlink" title="修改postgresql.conf文件中的端口和监听主机:"></a>修改postgresql.conf文件中的端口和监听主机:</h4><p>postsql默认安装后是监听本机127.0.0.1 默认端口是5432,是不能够远程登陆的，所以要修改监听主机地址postgresql数据库的配置文件是:postgresql.conf,所在位置是：postgresql初始化时所指定的data数据目录下：具体可参照上文的配置</p>
-<h4 id="重启postgresql服务生效："><a href="#重启postgresql服务生效：" class="headerlink" title="重启postgresql服务生效："></a>重启postgresql服务生效：</h4>
+<h4 id="重启postgresql服务生效："><a href="#重启postgresql服务生效：" class="headerlink" title="重启postgresql服务生效："></a>重启postgresql服务生效：</h4><h2 id="命令行下基础命令"><a href="#命令行下基础命令" class="headerlink" title="命令行下基础命令"></a>命令行下基础命令</h2><h3 id="基础查看指令"><a href="#基础查看指令" class="headerlink" title="基础查看指令"></a>基础查看指令</h3><ul>
+<li>连接数据库，默认的用户和数据库postgres: <code>psql -U user -d dbname</code></li>
+<li>切换数据库，相当于mysql的use dbname : <code>\c dbname</code></li>
+<li>列举数据库，相当于mysql的show databases： <code>\l</code></li>
+<li>列举表，相当于mysql的show tables ： <code>\dt</code></li>
+<li>查看表结构，相当于desc tblname,show columns from tbname ：<code>\d tblname</code></li>
+<li>查看索引 : <code>\di</code></li>
+<li>退出 psql: <code>\q</code></li>
+</ul>
+<h3 id="数据库操作相关指令"><a href="#数据库操作相关指令" class="headerlink" title="数据库操作相关指令"></a>数据库操作相关指令</h3><ul>
+<li>创建数据库： <code>create database [数据库名]</code>; </li>
+<li>删除数据库： <code>drop database [数据库名]</code>;  </li>
+<li>*重命名一个表： <code>alter table [表名A] rename to [表名B]</code>; </li>
+<li>*删除一个表： <code>drop table [表名]</code>;</li>
+<li>*在已有的表里添加字段： <code>alter table [表名] add column [字段名] [类型]</code>; </li>
+<li>*删除表中的字段： <code>alter table [表名] drop column [字段名]</code>; </li>
+<li>*重命名一个字段：<code>alter table [表名] rename column [字段名A] to [字段名B]</code>; </li>
+<li>*给一个字段设置缺省值： <code>alter table [表名] alter column [字段名] set default [新的默认值]</code>;</li>
+<li>*去除缺省值：<code>alter table [表名] alter column [字段名] drop default</code>; </li>
+<li>在表中插入数据： <code>insert into 表名 ([字段名m],[字段名n],......) values ([列m的值],[列n的值],......)</code>; </li>
+<li>修改表中的某行某列的数据： <code>update [表名] set [目标字段名]=[目标值] where [该行特征]</code>; </li>
+<li>删除表中某行数据： <code>delete from [表名] where [该行特征]</code>; </li>
+<li>删空整个表 : <code>delete from [表名]</code>;</li>
+<li>创建表： <code>create table ([字段名1] [类型1] ;,[字段名2] [类型2],......&lt;,primary key (字段名m,字段名n,...)&gt;;);</code></li>
+<li>显示 PostgreSQL 的使用和发行条款 <code>\copyright</code></li>
+<li>显示或设定用户端字元编码: <code>\encoding [字元编码名称]</code></li>
+<li>SQL 命令语法上的说明，用 * 显示全部命令 : <code>\h [名称]</code></li>
+</ul>
+<h3 id="备份还原相关指令"><a href="#备份还原相关指令" class="headerlink" title="备份还原相关指令"></a>备份还原相关指令</h3><p>可以使用pg_dump和pg_dumpall来完成。比如备份sales数据库：<br>pg_dump drupal&gt;/opt/Postgresql/backup/1.bak </p>
+<h3 id="删除库的时候报错"><a href="#删除库的时候报错" class="headerlink" title="删除库的时候报错"></a>删除库的时候报错</h3><figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ERROR: database "temp_test_yang" is being accessed by other users</span><br><span class="line">DETAIL: There are 4 other sessions using the database.</span><br></pre></td></tr></table></figure>
+<p>说明该temp_test_yang库正在被人连接。解决方法是：查询出连接该数据库的进程，并将其杀死(比较暴力)<br>select pg_terminate_backend(pid) from pg_stat_activity where DATNAME = ‘temp_test_yang’;</p>
+
       
     </div>
     
@@ -624,7 +655,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装"><span class="nav-number">2.</span> <span class="nav-text">安装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#下载安装软件包"><span class="nav-number">2.1.</span> <span class="nav-text">下载安装软件包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解压"><span class="nav-number">2.2.</span> <span class="nav-text">解压</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编译安装"><span class="nav-number">2.3.</span> <span class="nav-text">编译安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建postgres用户"><span class="nav-number">2.4.</span> <span class="nav-text">创建postgres用户</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置数据库"><span class="nav-number">2.5.</span> <span class="nav-text">配置数据库</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#修改监听地址"><span class="nav-number">2.5.1.</span> <span class="nav-text">修改监听地址</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#添加IP授权"><span class="nav-number">2.5.2.</span> <span class="nav-text">添加IP授权</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#启动-重启"><span class="nav-number">2.5.3.</span> <span class="nav-text">启动/重启</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置远程登陆账户和密码"><span class="nav-number">2.6.</span> <span class="nav-text">设置远程登陆账户和密码</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#修改postgresql-conf文件中的端口和监听主机"><span class="nav-number">2.6.1.</span> <span class="nav-text">修改postgresql.conf文件中的端口和监听主机:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#重启postgresql服务生效："><span class="nav-number">2.6.2.</span> <span class="nav-text">重启postgresql服务生效：</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装"><span class="nav-number">2.</span> <span class="nav-text">安装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#下载安装软件包"><span class="nav-number">2.1.</span> <span class="nav-text">下载安装软件包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解压"><span class="nav-number">2.2.</span> <span class="nav-text">解压</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#编译安装"><span class="nav-number">2.3.</span> <span class="nav-text">编译安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建postgres用户"><span class="nav-number">2.4.</span> <span class="nav-text">创建postgres用户</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置数据库"><span class="nav-number">2.5.</span> <span class="nav-text">配置数据库</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#修改监听地址"><span class="nav-number">2.5.1.</span> <span class="nav-text">修改监听地址</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#添加IP授权"><span class="nav-number">2.5.2.</span> <span class="nav-text">添加IP授权</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#启动-重启"><span class="nav-number">2.5.3.</span> <span class="nav-text">启动/重启</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设置远程登陆账户和密码"><span class="nav-number">2.6.</span> <span class="nav-text">设置远程登陆账户和密码</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#修改postgresql-conf文件中的端口和监听主机"><span class="nav-number">2.6.1.</span> <span class="nav-text">修改postgresql.conf文件中的端口和监听主机:</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#重启postgresql服务生效："><span class="nav-number">2.6.2.</span> <span class="nav-text">重启postgresql服务生效：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#命令行下基础命令"><span class="nav-number">3.</span> <span class="nav-text">命令行下基础命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基础查看指令"><span class="nav-number">3.1.</span> <span class="nav-text">基础查看指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据库操作相关指令"><span class="nav-number">3.2.</span> <span class="nav-text">数据库操作相关指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#备份还原相关指令"><span class="nav-number">3.3.</span> <span class="nav-text">备份还原相关指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#删除库的时候报错"><span class="nav-number">3.4.</span> <span class="nav-text">删除库的时候报错</span></a></li></ol></li></ol></div>
             
 
           </div>
