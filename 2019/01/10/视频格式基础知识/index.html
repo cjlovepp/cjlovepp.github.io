@@ -1,0 +1,1241 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="4K," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="前言 对于一个电影爱好者来说，看到各种带4K、2160p、10bit这种字眼的视频文件总是想着去下下来收藏起来。最近也尝试着接触各种PT站（以前不去尝试主要是因为，家里带宽不稳定，PT账号得来不易啊~~~）。但对于各种视频文件名总是不明其意，只是单纯的通过1080p，2160p这些关键信息来判断媒体文件的收藏价值，对于H264、H265这些更是一脸懵逼。所以决定学习扫盲下，不求深入，只求以后能在看">
+<meta name="keywords" content="4K">
+<meta property="og:type" content="article">
+<meta property="og:title" content="视频格式基础知识">
+<meta property="og:url" content="http://yoursite.com/2019/01/10/视频格式基础知识/index.html">
+<meta property="og:site_name" content="Cjlovepp blogs">
+<meta property="og:description" content="前言 对于一个电影爱好者来说，看到各种带4K、2160p、10bit这种字眼的视频文件总是想着去下下来收藏起来。最近也尝试着接触各种PT站（以前不去尝试主要是因为，家里带宽不稳定，PT账号得来不易啊~~~）。但对于各种视频文件名总是不明其意，只是单纯的通过1080p，2160p这些关键信息来判断媒体文件的收藏价值，对于H264、H265这些更是一脸懵逼。所以决定学习扫盲下，不求深入，只求以后能在看">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2019/01/10/视频格式基础知识/184550twpvrprviws8cc1m.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/01/10/视频格式基础知识/184546muyblbbi99i2i22n.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/01/10/视频格式基础知识/184547aasvpqeqmemqw262.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/01/10/视频格式基础知识/184548wruqukqzuat5kgmd.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/01/10/视频格式基础知识/184709chjjyhqrqtyxtbqq.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/01/10/视频格式基础知识/184548rzs7ebjpxxs4x24x.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/01/10/视频格式基础知识/184549w9zze72mxgtxk7x2.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/01/10/视频格式基础知识/184549x9fn4deio9ip0vdp.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/01/10/视频格式基础知识/184551lqwnnjrvs3z5lnr5.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/01/10/视频格式基础知识/184553u1a7fd1k2m8hhz2m.jpg">
+<meta property="og:image" content="http://yoursite.com/2019/01/10/视频格式基础知识/184554edwndrxtd36m68f6.jpg">
+<meta property="og:updated_time" content="2019-01-10T03:48:35.571Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="视频格式基础知识">
+<meta name="twitter:description" content="前言 对于一个电影爱好者来说，看到各种带4K、2160p、10bit这种字眼的视频文件总是想着去下下来收藏起来。最近也尝试着接触各种PT站（以前不去尝试主要是因为，家里带宽不稳定，PT账号得来不易啊~~~）。但对于各种视频文件名总是不明其意，只是单纯的通过1080p，2160p这些关键信息来判断媒体文件的收藏价值，对于H264、H265这些更是一脸懵逼。所以决定学习扫盲下，不求深入，只求以后能在看">
+<meta name="twitter:image" content="http://yoursite.com/2019/01/10/视频格式基础知识/184550twpvrprviws8cc1m.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/01/10/视频格式基础知识/"/>
+
+
+
+
+
+  <title>视频格式基础知识 | Cjlovepp blogs</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Cjlovepp blogs</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/10/视频格式基础知识/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Cjlovepp">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cjlovepp blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">视频格式基础知识</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-10T10:51:09+08:00">
+                2019-01-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/4K/" itemprop="url" rel="index">
+                    <span itemprop="name">4K</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
+<p>对于一个电影爱好者来说，看到各种带4K、2160p、10bit这种字眼的视频文件总是想着去下下来收藏起来。最近也尝试着接触各种PT站（以前不去尝试主要是因为，家里带宽不稳定，PT账号得来不易啊~~~）。但对于各种视频文件名总是不明其意，只是单纯的通过1080p，2160p这些关键信息来判断媒体文件的收藏价值，对于H264、H265这些更是一脸懵逼。所以决定学习扫盲下，不求深入，只求以后能在看到这些文件的时候能大致知道怎么回事就行。</p>
+</blockquote>
+<h2 id="封装格式-MP4-MKV…-VS-媒体格式-H-264-FLAC-AAC…"><a href="#封装格式-MP4-MKV…-VS-媒体格式-H-264-FLAC-AAC…" class="headerlink" title="封装格式(MP4/MKV…)  VS 媒体格式(H.264/FLAC/AAC…)"></a>封装格式(MP4/MKV…)  VS 媒体格式(H.264/FLAC/AAC…)</h2><p>MP4+MKV是你下载的视频文件最常见的种类。这些文件其实类似一个包裹，它的后缀则是包裹的包装方式。这些包裹里面，包含了视频（只有图像），音频（只有声音），字幕等。当播放器在播放的时候，首先对这个包裹进行拆包（专业术语叫做分离/splitting）,把其中的视频、音频等拿出来，再进行播放。</p>
+<p>既然它们只是一个包裹，就意味着这个后缀不能保证里面的东西是啥，也不能保证到底有多少东西。包裹里面的每一件物品，我们称之为轨道(track)，一般有这么些：</p>
+<ul>
+<li><p>视频(Video):一般来说肯定都有，但是也有例外，比如mka格式的外挂音轨，其实就是没视频的mkv。注意我们说到视频的时候，是不包括声音的。</p>
+</li>
+<li><p>音频(audio)：一般来说也肯定有，但是有些情况是静音的，就没必要带了。</p>
+</li>
+<li><p>章节(Chapter): 蓝光原盘中自带的分段信息。如果文件带上了，那么你可以在播放器中看到带章节的效果：</p>
+</li>
+<li><p>potplayer右键画面，选项-播放-在进度条上显示书签/章节标记</p>
+</li>
+<li><p>mpc-hc 右键画面，选项-调节-在进度条显示章节标记</p>
+</li>
+<li><p>字幕(Subtitles)：有些时候文件自带字幕，并且字幕并非是直接整合于视频的硬字幕，那么就是一起被打包在封装容器中。</p>
+</li>
+</ul>
+<p>其他可能还有附件等，不一一列举。每个类型也不一定只有一条轨道，比如经常见到带多音轨的MKV。</p>
+<p>每个轨道，都有自己的格式。比如大家常说的，视频是H.264，音频是AAC，这些就是每个轨道的格式。</p>
+<p>视频的格式，常见的有H.264(可以细分为8bit/10bit)，H.265(当前也有8bit/10bit之分)，RealVideo(常见于早期rm/rmvb)，VC-1(微软主导的，常见于wmv)。基本上，H.264=AVC=AVC1, H.265=HEVC。</p>
+<p>音频的格式，常见的有 FLAC/ALAC/TrueHD/DTS-HD MA这四种无损，和AAC/MP3/AC3/DTS(Core)这四种有损。</p>
+<h3 id="MKV-vs-MP4，主要的区别在于："><a href="#MKV-vs-MP4，主要的区别在于：" class="headerlink" title="MKV vs MP4，主要的区别在于："></a>MKV vs MP4，主要的区别在于：</h3><ul>
+<li>MKV支持封装FLAC作为音频，MP4则不支持。但是MP4也可以封装无损音轨(比如说ALAC，虽然普遍认为ALAC的效率不如FLAC优秀)</li>
+<li>MKV支持封装ASS/SSA格式的字幕，MP4则不支持。一般字幕组制作的字幕是ASS格式，所以内封字幕多见于MKV格式</li>
+<li>MP4作为工业标准，在视频编辑软件和播放设备上的兼容性一般好于MKV。这也是vcb-s那些为移动设备优化的视频基本上选择MP4封装的原因。</li>
+</ul>
+<p>除此之外，这两个格式很大程度上可以互相代替。比如它们都支持封装AVC和HEVC，包括8bit/10bit的精度。所以MP4画质不如MKV好，这种论断是非常无知的——它们完全可以封装一样的视频。</p>
+<p>为什么会有这样的分歧，就是历史原因了。MKV是民间研发，为了代替古老的AVI，从而更好地支持H264，它开发和修改的灵活度使得它可以兼容flac/ass这类非工业标准的格式；而MP4则是出生豪门，作为工业标准，替代更古老的MPG，作为新一代视频/音频封装服务的。</p>
+<h2 id="视频的基础参数：分辨率，帧率和码率"><a href="#视频的基础参数：分辨率，帧率和码率" class="headerlink" title="视频的基础参数：分辨率，帧率和码率"></a>视频的基础参数：分辨率，帧率和码率</h2><ul>
+<li><p><code>分辨率</code>：视频是由连续的图像构成的。每一张图像，我们称为一帧(frame)。图像则是由像素(pixel)构成的。一张图像有多少像素，称为这个图像的分辨率。比如说1920×1080的图像，说明它是由横纵1920×1080个像素点构成。视频的分辨率就是每一帧图像的分辨率。</p>
+</li>
+<li><p><code>帧率</code>：一个视频，每一秒由多少图像构成，称为这个视频的帧率(frame-rate)。常见的帧率有24000/1001=23.976, 30000/1001=29.970, 60000/1001=59.940, 25.000,50.000等等。这个数字是一秒钟内闪过的图像的数量。比如23.976，就是1001秒内，有24000张图像。视频的帧率是可以是恒定的(cfr, Const Frame-Rate)，也可以是变化的(vfr, Variable Frame-Rate)</p>
+</li>
+<li><p><code>码率</code>：码率的定义是视频文件体积除以时间。单位一般是Kbps(Kbit/s)或者Mbps(Mbit/s)。注意1B(Byte)=8b(bit)。所以一个24分钟，900MB的视频：</p>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">体积：<span class="number">900</span>MB = <span class="number">900</span>MByte = <span class="number">7200</span>Mbit</span><br><span class="line"></span><br><span class="line">时间：<span class="number">24</span>min = <span class="number">1440</span>s</span><br><span class="line"></span><br><span class="line">码率：<span class="number">7200</span>/<span class="number">1440</span>  = <span class="number">5000</span> Kbps = <span class="number">5</span>Mbps</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>当视频文件的时间基本相同的时候（比如现在一集番大概是24分钟），码率和体积基本上是等价的，都是用来描述视频大小的参数。长度分辨率都相同的文件，体积不同，实际上就是码率不同。</p>
+<p>码率也可以解读为单位时间内，用来记录视频的数据总量。码率越高的视频，意味着用来记录视频的数据量越多，潜在的解读就是视频可以拥有更好的质量。（注意，仅仅是潜在，后文我们会分析为什么高码率不一定等于高画质）</p>
+<h2 id="色深"><a href="#色深" class="headerlink" title="色深"></a>色深</h2><p>色深(bit-depth)，就是我们通常说的8bit和10bit，是指每个通道的精度。8bit就是每个通道用一个8bit整数(0~255)代表，10bit就是用10bit整数(0~1023)来显示。16bit则是0~65535</p>
+<p>(注意，上文的表述是不严谨的，视频在编码的时候，并非一定能用到0~255的所有范围，而是可能有所保留，只用到一部分，比如16~235。这我们就不详细展开了)</p>
+<p>你的显示器是8bit的，代表它能显示RGB每个通道0~255所有强度。但是视频的色深是YUV的色深，播放的时候，YUV需要通过计算转换到RGB。因此，10bit的高精度是间接的，它使得运算过程中精度增加，以让最后的颜色更细腻。</p>
+<p>如何理解8bit显示器，播放10bit是有必要的呢：</p>
+<p>一个圆的半径是12.33m, 求它的面积，保留两位小数。</p>
+<p>半径的精度给定两位小数，结果也要求两位小数，那么圆周率精度需要给多高呢？也只要两位小数么？<br>取pi=3.14, 面积算出来是477.37平方米<br>取pi=3.1416，面积算出来是477.61平方米<br>取pi精度足够高，面积算出来是477.61平方米。所以取pi=3.1416是足够的，但是3.14就不够了。</p>
+<p>换言之，即便最终输出的精度要求较低，也不意味着参与运算的数字，以及运算过程，可以保持较低的精度。在最终输出是8bit RGB的前提下，10bit YUV比起8bit YUV依旧具有精度优势的原因就在这里。事实上，8bit YUV转换后，覆盖的精度大概相当于8bit RGB的26%，而10bit转换后的精度大约可以覆盖97%——你想让你家8bit显示器发挥97%的细腻度么？看10bit吧。</p>
+<p>8bit精度不足，主要表现在亮度较低的区域，容易形成色带：<br><img src="/2019/01/10/视频格式基础知识/184550twpvrprviws8cc1m.jpg" alt=""><br>注意这图右边那一圈圈跟波浪一样的效果。这就是颜色精度不足的表现。</p>
+<p>10bit的优势不只在于显示精度的提高，在提高视频压缩率，减少失真方面，相对8bit也有优势。这方面就不展开了。</p>
+<h2 id="图像的表示方法：RGB模型-vs-YUV模型"><a href="#图像的表示方法：RGB模型-vs-YUV模型" class="headerlink" title="图像的表示方法：RGB模型 vs YUV模型"></a>图像的表示方法：RGB模型 vs YUV模型</h2><p>光的三原色是红(Red)、绿(Green)、蓝(Blue)。现代的显示器技术就是通过组合不同强度的三原色，来达成任何一种可见光的颜色。图像储存中，通过记录每个像素红绿蓝强度，来记录图像的方法，称为RGB模型 (RGB Model)</p>
+<p>常见的图片格式中，PNG和BMP这两种就是基于RGB模型的。</p>
+<p>比如说原图：<br><img src="/2019/01/10/视频格式基础知识/184546muyblbbi99i2i22n.jpg" alt=""><br>分别只显示R G B通道的强度，效果如下：<br><img src="/2019/01/10/视频格式基础知识/184547aasvpqeqmemqw262.jpg" alt=""><br><img src="/2019/01/10/视频格式基础知识/184548wruqukqzuat5kgmd.jpg" alt=""><br><img src="/2019/01/10/视频格式基础知识/184709chjjyhqrqtyxtbqq.jpg" alt=""><br>三个通道下，信息量和细节程度不一定是均匀分布的。比如说可以注意南小鸟脸上的红晕，在3个平面上的区分程度就不同——红色平面下几乎无从区分，造成区别的主要是绿色和蓝色的平面。外围白色的脸颊，三色都近乎饱和；但是红晕部分，只有红色饱和，绿色和蓝色不饱和。这是造成红色凸显的原因。</p>
+<p>除了RGB模型，还有一种广泛采用的模型，称为YUV模型，又被称为亮度-色度模型（Luma-Chroma）。它是通过数学转换，将RGB三个通道，转换为一个代表亮度的通道(Y,又称为Luma)，和两个代表色度的通道(UV，并成为Chroma)。</p>
+<p>举个形象点的例子：一家养殖场饲养猪和牛，一种记数方式是：（猪的数量，牛的数量）</p>
+<p>但是也可以这么记录：（总数量=猪的数量+牛的数量，相差=猪的数量-牛的数量）。两种方法之间有数学公式可以互转。</p>
+<p>YUV模型干的是类似的事儿。通过对RGB数据的合理转换，得到另一种表示方式。YUV模型下，还有不同的实现方式。举个用的比较多的YCbCr模型：它把RGB转换成一个亮度(Y)，和 蓝色色度(Cb) 以及 红色色度(Cr)。转换背后复杂的公式大家不需要了解，只需要看看效果：</p>
+<p>只有亮度通道：<br><img src="/2019/01/10/视频格式基础知识/184548rzs7ebjpxxs4x24x.jpg" alt=""><br>只有蓝色色度：<br><img src="/2019/01/10/视频格式基础知识/184549w9zze72mxgtxk7x2.jpg" alt=""><br>只有红色色度：<br><img src="/2019/01/10/视频格式基础知识/184549x9fn4deio9ip0vdp.jpg" alt=""><br>在图像视频的加工与储存中，YUV格式一般更受欢迎，理由如下：</p>
+<ul>
+<li>1、人眼对亮度的敏感度远高于色度，因此人眼看到的有效信息主要来自于亮度。YUV模型可以将绝大多数的有效信息分配到Y通道。UV通道相对记录的信息少的多。相对于RGB模型较为平均的分配，YUV模型将多数有效信息集中在Y通道，不但减少了冗余信息量，还为压缩提供了便利</li>
+<li>2、保持了对黑白显示设备的向下兼容</li>
+<li>3、图像编辑中，调节亮度和颜色饱和度，在YUV模型下更方便。</li>
+</ul>
+<p>几乎所有的视频格式，以及广泛使用的JPEG图像格式，都是基于YCbCr模型的。播放的时候，播放器需要将YCbCr的信息，通过计算，转换为RGB。这个步骤称为渲染（Rendering）</p>
+<p>每个通道的记录，通常是用整数来表示。比如RGB24，就是RGB各8个bit，用0~255 (8bit的二进制数范围)来表示某个颜色的强弱。YUV模型也不例外，也是用整数来表示每个通道的高低。</p>
+<h2 id="色度半采样"><a href="#色度半采样" class="headerlink" title="色度半采样"></a>色度半采样</h2><p>在YUV模型的应用中，Y和UV的重要性是不等同的。图像视频的实际储存和传输中，通常将Y以全分辨率记录，UV以减半甚至1/4的分辨率记录。这个手段被称为色度半采样(Chroma Sub-Sampling)。色度半采样可以有效减少传输带宽，和加大UV平面的压缩率，但是不可避免的会损失UV平面的有效信息。</p>
+<p>我们平常的视频，最常见的是420采样。配合YUV格式，常常被写作yuv420。这种采样是Y保留全部，UV只以(1/2) x (1/2)的分辨率记录。比如说1920×1080的视频，其实只有亮度平面是1920×1080。两个色度平面都只有960×540的分辨率。</p>
+<p>当然了，你也可以选择不做缩减。这种称为444采样，或者yuv444。YUV三个平面全是满分辨率。</p>
+<p>在做YUV-&gt;RGB的时候，首先需要将缩水的UV分辨率拉升到Y的分辨率（madVR中允许自定义算法，在Chroma Upscaling当中），然后再转换到RGB。做RGB-&gt;YUV的转换，也是先转换到444（YUV的分辨率相同），再将UV分辨率降低。</p>
+<p>一般能拿到的片源，包括所有蓝光原盘，都是420采样的。所以成品一般也保留420采样。所以yuv420就表示这个视频是420采样的yuv格式。</p>
+<p>将420做成444格式，需要自己手动将UV分辨率拉升2×2倍。在今天madVR等渲染器可以很好地拉升UV平面的情况下，这种做法无异于毫无必要的拉升DVD做成伪高清。</p>
+<p>当然了，有时候也需要在444/RGB平面下做处理和修复，常见的比如视频本身RGB平面不重叠（比如摩卡少女樱），这种修复过程首先要将UV分辨率拉升，然后转RGB，做完修复再转回YUV。修复后的结果相当于全新构图，这种情况下保留444格式就是有理由，有必要的。</p>
+<p>H264格式编码444格式，需要High 4:4:4 Predictive Profile（简称Hi444pp）。所以看到Hi444pp/yuv444 之类的标示，你就需要去找压制者的陈述，为什么他要做这么个拉升。如果找不到有效的理由，你应该默认作者是在瞎做。</p>
+<h2 id="空间上的低频与高频：平面，纹理和线条"><a href="#空间上的低频与高频：平面，纹理和线条" class="headerlink" title="空间上的低频与高频：平面，纹理和线条"></a>空间上的低频与高频：平面，纹理和线条</h2><p>在视频处理中，空间(spatial)的概念指的是一帧图片以内（你可以认为就是一张图所呈现的二维空间/平面）。跟时间(temporal)相对；时间的概念就强调帧与帧之间的变换。</p>
+<p>于是我们重新来看这张亮度的图：<br><img src="/2019/01/10/视频格式基础知识/184551lqwnnjrvs3z5lnr5.jpg" alt=""><br>亮度变化较快，变动幅度大的区域，我们称之为高频区域。否则，亮度变化缓慢且不明显的区域，我们称为低频区域。</p>
+<p>图中的蓝圈就是一块典型的低频区域，或者就叫做平面（平坦的部分）。亮度几乎没有变化</p>
+<p>绿圈中，亮度呈现跳跃式的突变，这种高频区域我们称之为线条。</p>
+<p>红圈中，亮度频繁变化，幅度有高有低，这种高频区域我们称为纹理。</p>
+<p>有时候，线条和纹理（高频区域）统称为线条，平面（低频区域）又叫做非线条。</p>
+<p>这是亮度平面。色度平面，高频低频，线条等概念也同样适用，就是描述色度变化的快慢轻重。一般我们所谓的“细节”，就是指图像中的高频信息。</p>
+<p>一般来说，一张图的高频信息越多，意味着这张图信息量越大，所需要记录的数据量就越多，编码所需要的运算量也越大。如果一个视频包含的空间性高频信息很多（通俗点说就是每一帧内细节很多），意味着这个视频的空间复杂度很高。</p>
+<p>记录一张图片，编码器需要决定给怎样的部分多少码率。码率在一张图内不同部分的分配，叫做码率的空间分配。分配较好的时候，往往整幅图目视观感比较统一；分配不好常见的后果，就是线条纹理尚可，背景平面区域出现大量色带色块（码率被过分的分配给线条）；或者背景颜色过渡自然，纹理模糊，线条烂掉（码率被过分的分配给非线条）。</p>
+<h2 id="时间上的低频与高频：动态"><a href="#时间上的低频与高频：动态" class="headerlink" title="时间上的低频与高频：动态"></a>时间上的低频与高频：动态</h2><p>在视频处理中，时间(temporal)的概念强调帧与帧之间的变换。跟空间(spatial)相对。</p>
+<p>动态的概念无需多解释；就是帧与帧之间图像变化的强弱，变化频率的高低。一段视频如果动态很高，变化剧烈，我们称为时间复杂度较高，时域上的高频信息多。否则如果视频本身舒缓多静态，我们称为时间复杂度低，时域上的低频信息多。</p>
+<p>一般来说，一段视频的时域高频信息多，动态的信息量就大，所需要记录的数据量就越多，编码所需要的运算量也越大。但是另一方面，人眼对高速变化的场景，敏感度不如静态的图片来的高（你没有时间去仔细观察细节），所以动态场景的优先度可以低于静态场景。如何权衡以上两点去分配码率，被称为码率的时间分配。分配较好的时候，看视频无论动态还是静态效果都较好；分配不好的时候往往是静态部分看着还行，动态部分糊烂掉；或者动态部分效果过分的好，浪费了大量码率，造成静态部分欠码，瑕疵明显。</p>
+<p>很多人喜欢看静止的截图对比，来判断视频的画质。从观看的角度，这种做法其实并不完全科学——如果你觉得比较烂的一帧其实是取自高动态场景，那么这一帧稍微烂点无可厚非，反正观看的时候你注意不到，将码率省下来给静态部分会更好。</p>
+<h2 id="清晰度与画质简述"><a href="#清晰度与画质简述" class="headerlink" title="清晰度与画质简述"></a>清晰度与画质简述</h2><p>我们经常讨论，一个视频清晰度如何，画质好不好。但是如何给这两个术语做定义呢？</p>
+<p>经常看到的说法：“这个视频清晰度是1080p的”。其实看过上文你就应该知道，1080p只是视频的分辨率，它不能直接代表清晰度——比如说，我可以把一个480p的dvd视频拉升到1080p，那又怎样呢？它的清晰度难道就提高了么？</p>
+<p>一个比较接近清晰度的概念，是上文所讲述的，空间高频信息量，就是一帧内的细节。一张图，一个视频的细节多，它的清晰度就高。分辨率决定了高频信息量的上限；就是它最清晰能到什么地步。1080p之所以比480p好，是因为它可以允许图像记录的高频信息多。这个说法看样子很靠谱，但是，有反例：<br><img src="/2019/01/10/视频格式基础知识/184553u1a7fd1k2m8hhz2m.jpg" alt=""><br>右图的高频信息远比左图多——它的线条很锐利，有大量致密的噪点（注意噪点完全符合高频信息的定义；它使得图像变化的非常快）<br>但是你真的觉得右图清晰度高么？<br>事实上，右图完全是通过左图加工而来。通过过度锐化+强噪点，人为的增加无效的高频信息。</p>
+<p>所以清晰度的定义我更倾向于这样一个说法：图像或视频中，原生、有效的高频信息。<br>原生，强调这种清晰度是非人工添加的；有效；强调细节本身有意义，而不是毫无意义的噪点特效。</p>
+<p>值得一提的是，人为增加的高频信息不见得完全没有帮助。有的时候适度锐化的确能够起到不错的目视效果：<br><img src="/2019/01/10/视频格式基础知识/184554edwndrxtd36m68f6.jpg" alt=""><br>这是一幅适度锐化后的效果。如果有人觉得右图更好，至少某些部分更好，相信我，你不是一个人。所以适度锐化依旧是视频和图像处理中，可以接受的一种主观调整的手段，一定的场合下，它确实有助于提高目视效果。</p>
+<p>以上是清晰度的概述。注意，清晰度只是空间方面（就是一帧以内）。如果再考虑到动态效果的优秀与否（视频是不是那种一动起来就糊成一团的，或者动起来感觉卡顿明显的，常见于早起RMVB），空间和时间上优秀的观看效果共同定义了画质。所以我们说madVR/svp那些倍帧效果有助于提高画质，实际上它们增强了时间上的观看效果。</p>
+<p>好的画质，是制作者和观众共同追求的。怎么样的视频会有好的画质呢？是不是码率越高的视频画质越好呢？真不见得。视频的画质，是由以下几点共同决定的：</p>
+<ul>
+<li><p>1、源的画质。<br>俗话说的好，上梁不正下梁歪。如果源的画质本身很差，那么再如何折腾都别指望画质好到哪去。所以压制者往往会选择更好的源进行压制——举个栗子，BDRip一般都比TVRip来的好，哪怕是720p。蓝光也分销售地区，一般日本销售的日版，画质上比美版、台版、港版啥的都来得好，所以同样是BDRip，选取更好的源，就能做到画质上优先一步。</p>
+</li>
+<li><p>2、播放条件。<br>观众是否用了足矣支持高画质播放的硬件和软件。这就是为啥我们在发布Rip的同时大力普及好的播放器；有时候一个好的播放器胜过多少在制作方面的精力投入。</p>
+</li>
+<li><p>3、码率投入vs编码复杂度。<br>视频的时间和空间复杂度，并称为编码复杂度。编码复杂度高的视频，往往细节多，动态高（比如《魔法少女小圆剧场版 叛逆的物语》），这样的视频天生需要较高的码率去维持一个优秀的观看效果。<br>相反，有些视频编码复杂度低（比如《请问今天要来点兔子么》，动态少，线条细节柔和），这种视频就是比较节省码率的。</p>
+</li>
+<li><p>4、码率分配的效率和合理度。<br>同样多的码率，能起到怎样好的效果，被称为效率。比如H264就比之前的RealVideo效率高；10bit比8bit效率高；编码器先进，参数设置的比较合理，编码器各种高端参数全开（通常以编码时间作为代价），码率效率就高。<br>合理度就是码率在时空分配方面合理与否，合理的分配，给观众的观看效果就比较统一协调。 码率分配的效率和合理度，是对制作者的要求，要求制作者对片源分析，参数设置有比较到位的理解。</p>
+</li>
+</ul>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><a href="https://www.4k123.com/thread-8194-1-1.html" target="_blank" rel="noopener">视频格式基础知识：让你了解MKV、MP4、H.265、码率、色深等等…</a></li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/4K/" rel="tag"># 4K</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/08/22/redis-jedis使用管道-pipeline/" rel="next" title="redis-jedis使用管道(pipeline)">
+                <i class="fa fa-chevron-left"></i> redis-jedis使用管道(pipeline)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/uploads/avatar.png"
+                alt="Cjlovepp" />
+            
+              <p class="site-author-name" itemprop="name">Cjlovepp</p>
+              <p class="site-description motion-element" itemprop="description">燥起来</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#封装格式-MP4-MKV…-VS-媒体格式-H-264-FLAC-AAC…"><span class="nav-number">2.</span> <span class="nav-text">封装格式(MP4/MKV…)  VS 媒体格式(H.264/FLAC/AAC…)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#MKV-vs-MP4，主要的区别在于："><span class="nav-number">2.1.</span> <span class="nav-text">MKV vs MP4，主要的区别在于：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#视频的基础参数：分辨率，帧率和码率"><span class="nav-number">3.</span> <span class="nav-text">视频的基础参数：分辨率，帧率和码率</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#色深"><span class="nav-number">4.</span> <span class="nav-text">色深</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#图像的表示方法：RGB模型-vs-YUV模型"><span class="nav-number">5.</span> <span class="nav-text">图像的表示方法：RGB模型 vs YUV模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#色度半采样"><span class="nav-number">6.</span> <span class="nav-text">色度半采样</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#空间上的低频与高频：平面，纹理和线条"><span class="nav-number">7.</span> <span class="nav-text">空间上的低频与高频：平面，纹理和线条</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#时间上的低频与高频：动态"><span class="nav-number">8.</span> <span class="nav-text">时间上的低频与高频：动态</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#清晰度与画质简述"><span class="nav-number">9.</span> <span class="nav-text">清晰度与画质简述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">10.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Cjlovepp</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count"></span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
