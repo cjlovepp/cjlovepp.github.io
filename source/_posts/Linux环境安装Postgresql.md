@@ -51,7 +51,7 @@ chown postgres /usr/local/pgsql/data
 - 给postgres用户添加访问权限：`chown postgres /mydir/pgsql_data/`
 - 切换到postgres用户来操作数据库，pgsql数据库就以postgres为默认用户，执行： `su - postgres` 切换。切换之后建议修改~/.bash_profile将pgsql的bin目录加至环境变量中，方便直接使用pgsql相关命令
 - 初始化数据库：`/usr/lib/pg/bin/initdb -D /mydir/pgsql_data/`,执行结果如下说明成功
-<img src="初始化pg/initpg.png" alt="initDB">
+<img src="Linux环境安装Postgresql/initpg.png" alt="initDB">
 
 ### 配置数据库
 配置远程访问需要修改两个配置文件`postgresql.conf`和`pg_hba.conf`
