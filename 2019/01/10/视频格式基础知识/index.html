@@ -98,7 +98,7 @@
 <meta property="og:image" content="http://yoursite.com/2019/01/10/视频格式基础知识/184551lqwnnjrvs3z5lnr5.jpg">
 <meta property="og:image" content="http://yoursite.com/2019/01/10/视频格式基础知识/184553u1a7fd1k2m8hhz2m.jpg">
 <meta property="og:image" content="http://yoursite.com/2019/01/10/视频格式基础知识/184554edwndrxtd36m68f6.jpg">
-<meta property="og:updated_time" content="2019-01-10T03:48:35.571Z">
+<meta property="og:updated_time" content="2019-01-10T03:56:17.467Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="视频格式基础知识">
 <meta name="twitter:description" content="前言 对于一个电影爱好者来说，看到各种带4K、2160p、10bit这种字眼的视频文件总是想着去下下来收藏起来。最近也尝试着接触各种PT站（以前不去尝试主要是因为，家里带宽不稳定，PT账号得来不易啊~~~）。但对于各种视频文件名总是不明其意，只是单纯的通过1080p，2160p这些关键信息来判断媒体文件的收藏价值，对于H264、H265这些更是一脸懵逼。所以决定学习扫盲下，不求深入，只求以后能在看">
@@ -422,6 +422,7 @@
         <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><blockquote>
 <p>对于一个电影爱好者来说，看到各种带4K、2160p、10bit这种字眼的视频文件总是想着去下下来收藏起来。最近也尝试着接触各种PT站（以前不去尝试主要是因为，家里带宽不稳定，PT账号得来不易啊~~~）。但对于各种视频文件名总是不明其意，只是单纯的通过1080p，2160p这些关键信息来判断媒体文件的收藏价值，对于H264、H265这些更是一脸懵逼。所以决定学习扫盲下，不求深入，只求以后能在看到这些文件的时候能大致知道怎么回事就行。</p>
 </blockquote>
+<a id="more"></a>
 <h2 id="封装格式-MP4-MKV…-VS-媒体格式-H-264-FLAC-AAC…"><a href="#封装格式-MP4-MKV…-VS-媒体格式-H-264-FLAC-AAC…" class="headerlink" title="封装格式(MP4/MKV…)  VS 媒体格式(H.264/FLAC/AAC…)"></a>封装格式(MP4/MKV…)  VS 媒体格式(H.264/FLAC/AAC…)</h2><p>MP4+MKV是你下载的视频文件最常见的种类。这些文件其实类似一个包裹，它的后缀则是包裹的包装方式。这些包裹里面，包含了视频（只有图像），音频（只有声音），字幕等。当播放器在播放的时候，首先对这个包裹进行拆包（专业术语叫做分离/splitting）,把其中的视频、音频等拿出来，再进行播放。</p>
 <p>既然它们只是一个包裹，就意味着这个后缀不能保证里面的东西是啥，也不能保证到底有多少东西。包裹里面的每一件物品，我们称之为轨道(track)，一般有这么些：</p>
 <ul>
