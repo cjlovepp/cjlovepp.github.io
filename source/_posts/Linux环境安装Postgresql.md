@@ -160,3 +160,63 @@ DETAIL: There are 4 other sessions using the database.
 ```
 说明该temp_test_yang库正在被人连接。解决方法是：查询出连接该数据库的进程，并将其杀死(比较暴力)
 select pg_terminate_backend(pid) from pg_stat_activity where DATNAME = 'temp_test_yang';
+
+### 一点补充
+
+#### PostgreSQL的自增id serial
+postgreSQL的自增序列创建方式
+```sql
+create table test (
+    id serial，  #使用serial来创建一个自增id
+    name varchar(64) not null
+    )
+```
+通过serial创建自增id，同时会创建属于这个表的自增序列，并将id字段设置为not nul。`serial`和`bigserial`类型不是真正的类型，只是为在表中设置唯一标识做的概念上的便利，本质上是创建了一个序列发生器，然后把自增字段的默认值设置为这个序列发生器的nextval
+```sql
+CREATE TABLE tablename (
+    colname SERIAL
+);
+#等价于
+CREATE SEQUENCE tablename_colname_seq;
+CREATE TABLE tablename(
+    colname integer DEFAULT nextval('tablename_colname_seq') NOT NULL
+);
+```
+#### 序列的介绍
+```sql
+postgres=# \d+ test5_id_seq 
+         Sequence "public.test5_id_seq"
+Column     |  Type   |        Value        | Storage 
+---------------+---------+---------------------+---------
+ sequence_name | name    | test5_id_seq        | plain
+ last_value    | bigint  | 1                   | plain
+ start_value   | bigint  | 1                   | plain    #序列起始值
+ increment_by  | bigint  | 1                   | plain     #每次递增值
+ max_value     | bigint  | 9223372036854775807 | plain        #最大值
+ min_value     | bigint  | 1                   | plain       #最小值
+ cache_value   | bigint  | 1                   | plain     
+ log_cnt       | bigint  | 0                   | plain 
+ is_cycled     | boolean | f                   | plain   #是否循环
+ is_called     | boolean | f                   | plain
+Owned by: public.test5.id
+```
+因为自增本质上是取序列发生器的下一个值，所以可以多个表共用一个序列发生器，可以实现多表唯一值，当然，还可以设置序列是否可循环来实现id循环
+<img src="Linux环境安装Postgresql/serial.png" >
+
+- 创建序列
+```sql
+CREATE SEQUENCE name increment by 1 maxvalue 10 minvalue 1 start 1 cycle
+```
+- 序列操作
+```console
+下一个值：nextval(regclass)
+当前值：currval(regclass)
+设置值：setval(regclass)
+```
+- 将序列绑定到表
+```sql
+create table test_seq (
+    id int not null default nextval('my_seq1'), 
+    name varchar(64)
+    )
+```
